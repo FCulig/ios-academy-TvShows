@@ -33,7 +33,7 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
-                                    <action selector="buttonTouched:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="ECq-9Z-fyO"/>
+                                    <action selector="buttonPressed" destination="Y6W-OH-hqX" eventType="touchUpInside" id="gAn-MU-UgC"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dlG-aT-XIY">
@@ -60,10 +60,10 @@
                         <color key="backgroundColor" red="0.0064653864107709303" green="0.050896225813036676" blue="0.14760381525213073" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
                     <connections>
-                        <outlet property="loader" destination="DkW-aD-uQ6" id="oIC-R0-3iq"/>
-                        <outlet property="loadingText" destination="h8s-BX-fru" id="AYn-7O-nVo"/>
-                        <outlet property="touchButton" destination="ZGF-iL-pmF" id="QLy-pv-2A1"/>
-                        <outlet property="touchLabel" destination="dlG-aT-XIY" id="X0h-sh-B4i"/>
+                        <outlet property="loadingIndicator" destination="DkW-aD-uQ6" id="69C-xD-lxN"/>
+                        <outlet property="loadingIndicatorText" destination="h8s-BX-fru" id="PeY-On-tCa"/>
+                        <outlet property="touchCounterButton" destination="ZGF-iL-pmF" id="6ra-si-akl"/>
+                        <outlet property="touchCounterLabel" destination="dlG-aT-XIY" id="tyY-IQ-ZwA"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

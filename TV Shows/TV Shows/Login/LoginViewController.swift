@@ -10,12 +10,12 @@ import UIKit
 
 class LoginViewController : UIViewController {
     
-    @IBOutlet weak var touchLabel: UILabel!
-    @IBOutlet weak var touchButton: UIButton!
-    @IBOutlet weak var loader: UIActivityIndicatorView!
-    @IBOutlet weak var loadingText: UILabel!
+    @IBOutlet private weak var touchCounterLabel: UILabel!
+    @IBOutlet private weak var touchCounterButton: UIButton!
+    @IBOutlet private weak var loadingIndicator: UIActivityIndicatorView!
+    @IBOutlet private weak var loadingIndicatorLabel: UILabel!
     
-    var touchCounter = 0
+    private var numberOfClicks: Int = 0
     
     override func viewDidLoad(){
         super.viewDidLoad()
@@ -26,26 +26,26 @@ class LoginViewController : UIViewController {
         })
     }
     
-    @IBAction func buttonTouched(_ sender: Any) {
-        touchCounter+=1
-        updateDisplay()
+    @IBAction private func buttonPressed() {
+        numberOfClicks += 1
+        configureUI()
     }
     
-    func updateDisplay(){
-        touchLabel.text = String(touchCounter)
+    private func configureUI(){
+        touchCounterLabel.text = String(numberOfClicks)
     }
     
-    func showLoadingScreen(){
-        loader.startAnimating()
-        touchLabel.isHidden = true
-        touchButton.isHidden = true
+    private func showLoadingScreen(){
+        loadingIndicator.startAnimating()
+        touchCounterLabel.isHidden = true
+        touchCounterButton.isHidden = true
     }
     
-    func hideLoadingScreen(){
-        loader.stopAnimating()
-        loadingText.isHidden = true
-        touchLabel.isHidden = false
-        touchButton.isHidden = false
+    private func hideLoadingScreen(){
+        loadingIndicator.stopAnimating()
+        loadingIndicatorLabel.isHidden = true
+        touchCounterLabel.isHidden = false
+        touchCounterButton.isHidden = false
     }
     
 }
