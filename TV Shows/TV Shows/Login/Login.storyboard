@@ -61,7 +61,7 @@
                     </view>
                     <connections>
                         <outlet property="loadingIndicator" destination="DkW-aD-uQ6" id="69C-xD-lxN"/>
-                        <outlet property="loadingIndicatorText" destination="h8s-BX-fru" id="PeY-On-tCa"/>
+                        <outlet property="loadingIndicatorLabel" destination="h8s-BX-fru" id="AYG-1C-9iZ"/>
                         <outlet property="touchCounterButton" destination="ZGF-iL-pmF" id="6ra-si-akl"/>
                         <outlet property="touchCounterLabel" destination="dlG-aT-XIY" id="tyY-IQ-ZwA"/>
                     </connections>
