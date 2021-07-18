@@ -28,25 +28,19 @@ class LoginViewController : UIViewController, UITextFieldDelegate {
     }
     
     private func initializeTextFields(){
-        addBottomLineToTextField(emailTextField)
-        addBottomLineToTextField(passwordTextField)
+        setTextFieldPlaceholderColor(emailTextField)
+        setTextFieldPlaceholderColor(passwordTextField)
         emailTextField.addTarget(self, action: #selector(loginFormFieldChanged(_:)), for: .editingChanged)
         passwordTextField.addTarget(self, action: #selector(loginFormFieldChanged(_:)), for: .editingChanged)
         passwordTextField.addTarget(self, action: #selector(passwordFieldChanged(_:)), for: .editingChanged)
     }
     
     private func initializeButtons(){
-        togglePasswordVisibilityButton.setImage(UIImage.init(), for: .disabled)
-        togglePasswordVisibilityButton.isEnabled = false
+        togglePasswordVisibilityButton.isHidden = true
         disableLoginButton()
     }
     
-    private func addBottomLineToTextField(_ textField: UITextField){
-        let bottomLine = CALayer()
-        bottomLine.frame = CGRect(x: 0, y: textField.frame.height + 5 ,width: textField.frame.width, height: 2)
-        bottomLine.backgroundColor = UIColor.init(red: 255/255, green: 255/255, blue: 255/255, alpha: 1).cgColor
-        textField.borderStyle = .none
-        textField.layer.addSublayer(bottomLine)
+    private func setTextFieldPlaceholderColor(_ textField: UITextField){
         textField.attributedPlaceholder = NSAttributedString(string: textField.placeholder!, attributes: [NSAttributedString.Key.foregroundColor: UIColor.init(white: 1, alpha: 0.70)])
     }
     
@@ -69,9 +63,9 @@ class LoginViewController : UIViewController, UITextFieldDelegate {
     
     @objc private func passwordFieldChanged(_ textField: UITextField) {
         if passwordTextField.text != ""{
-            togglePasswordVisibilityButton.isEnabled = true
+            togglePasswordVisibilityButton.isHidden = false
         } else {
-            togglePasswordVisibilityButton.isEnabled = false
+            togglePasswordVisibilityButton.isHidden = true
         }
     }
     
