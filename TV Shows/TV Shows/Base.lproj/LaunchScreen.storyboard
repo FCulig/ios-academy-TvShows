@@ -16,21 +16,26 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="logo-white" translatesAutoresizingMaskIntoConstraints="NO" id="9Qz-Xp-k9x">
-                                <rect key="frame" x="87" y="384" width="240" height="128"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo-white" translatesAutoresizingMaskIntoConstraints="NO" id="9Qz-Xp-k9x">
+                                <rect key="frame" x="126" y="429" width="162" height="38"/>
                             </imageView>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="topRight" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="splash-top-right" translatesAutoresizingMaskIntoConstraints="NO" id="BH2-dS-igX">
-                                <rect key="frame" x="201" y="0.0" width="213" height="284"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="topRight" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="splash-top-right" translatesAutoresizingMaskIntoConstraints="NO" id="BH2-dS-igX">
+                                <rect key="frame" x="212" y="0.0" width="202" height="266"/>
                             </imageView>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="TopLeft" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="splash-top-left" translatesAutoresizingMaskIntoConstraints="NO" id="KsM-Ab-NKu">
-                                <rect key="frame" x="0.0" y="0.0" width="156" height="147"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="TopLeft" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="splash-top-left" translatesAutoresizingMaskIntoConstraints="NO" id="KsM-Ab-NKu">
+                                <rect key="frame" x="0.0" y="0.0" width="140" height="100"/>
                             </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" red="0.3224566579" green="0.2114402652" blue="0.54911524060000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="9Qz-Xp-k9x" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="5ak-tF-mI3"/>
+                            <constraint firstItem="KsM-Ab-NKu" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="IkO-r0-yBS"/>
+                            <constraint firstItem="9Qz-Xp-k9x" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="J75-oA-RM1"/>
+                            <constraint firstItem="BH2-dS-igX" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="OBJ-H5-g2N"/>
+                            <constraint firstItem="KsM-Ab-NKu" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" id="RFn-Eb-PKF"/>
+                            <constraint firstAttribute="trailing" secondItem="BH2-dS-igX" secondAttribute="trailing" id="d9l-LI-Df2"/>
+                        </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>
