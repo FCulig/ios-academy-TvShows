@@ -10,6 +10,8 @@
 		4215772726975F37008CCFF0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4215772626975F37008CCFF0 /* AppDelegate.swift */; };
 		4215773026975F3B008CCFF0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4215772F26975F3A008CCFF0 /* Assets.xcassets */; };
 		4215773326975F3B008CCFF0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4215773126975F3B008CCFF0 /* LaunchScreen.storyboard */; };
+		425D410026A5CB1C007EFA44 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 425D40FF26A5CB1C007EFA44 /* HomeViewController.swift */; };
+		425D410226A5CB52007EFA44 /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 425D410126A5CB52007EFA44 /* Home.storyboard */; };
 		4274C450269AE0F800D205EE /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4274C44F269AE0F800D205EE /* Login.storyboard */; };
 		4274C452269AE10E00D205EE /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4274C451269AE10E00D205EE /* LoginViewController.swift */; };
 		906B511FC4724AD786E6DFA2 /* Pods_TV_Shows.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05BDDA4BAE296372D8790DEE /* Pods_TV_Shows.framework */; };
@@ -22,6 +24,8 @@
 		4215772F26975F3A008CCFF0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4215773226975F3B008CCFF0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4215773426975F3B008CCFF0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		425D40FF26A5CB1C007EFA44 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		425D410126A5CB52007EFA44 /* Home.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Home.storyboard; sourceTree = "<group>"; };
 		4274C44F269AE0F800D205EE /* Login.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
 		4274C451269AE10E00D205EE /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		98A58600877FE61D65834300 /* Pods-TV Shows.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TV Shows.release.xcconfig"; path = "Target Support Files/Pods-TV Shows/Pods-TV Shows.release.xcconfig"; sourceTree = "<group>"; };
@@ -70,6 +74,7 @@
 		4215772526975F37008CCFF0 /* TV Shows */ = {
 			isa = PBXGroup;
 			children = (
+				425D40FE26A5CAE8007EFA44 /* Home */,
 				4274C44E269AE0C100D205EE /* Login */,
 				4215772626975F37008CCFF0 /* AppDelegate.swift */,
 				4215772F26975F3A008CCFF0 /* Assets.xcassets */,
@@ -77,6 +82,15 @@
 				4215773426975F3B008CCFF0 /* Info.plist */,
 			);
 			path = "TV Shows";
+			sourceTree = "<group>";
+		};
+		425D40FE26A5CAE8007EFA44 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				425D40FF26A5CB1C007EFA44 /* HomeViewController.swift */,
+				425D410126A5CB52007EFA44 /* Home.storyboard */,
+			);
+			path = Home;
 			sourceTree = "<group>";
 		};
 		4274C44E269AE0C100D205EE /* Login */ = {
@@ -158,6 +172,7 @@
 				4215773326975F3B008CCFF0 /* LaunchScreen.storyboard in Resources */,
 				4215773026975F3B008CCFF0 /* Assets.xcassets in Resources */,
 				4274C450269AE0F800D205EE /* Login.storyboard in Resources */,
+				425D410226A5CB52007EFA44 /* Home.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -212,6 +227,7 @@
 			files = (
 				4274C452269AE10E00D205EE /* LoginViewController.swift in Sources */,
 				4215772726975F37008CCFF0 /* AppDelegate.swift in Sources */,
+				425D410026A5CB1C007EFA44 /* HomeViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
