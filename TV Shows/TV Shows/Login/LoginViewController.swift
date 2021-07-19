@@ -53,6 +53,20 @@ class LoginViewController : UIViewController, UITextFieldDelegate {
         passwordTextField.isSecureTextEntry = !passwordTextField.isSecureTextEntry
     }
     
+    @IBAction private func loginPressed() {
+        navigateToHomeController()
+    }
+    
+    @IBAction private func registerPressed() {
+       navigateToHomeController()
+    }
+    
+    private func navigateToHomeController(){
+        let storyboard = UIStoryboard(name: "Home", bundle: nil)
+        let viewControllerD = storyboard.instantiateViewController(withIdentifier: "HomeView")
+        navigationController?.pushViewController(viewControllerD, animated: true)
+    }
+    
     @objc private func loginFormFieldChanged(_ textField: UITextField) {
         if emailTextField.text != "" && passwordTextField.text != ""{
            enableLoginButton()
@@ -67,6 +81,16 @@ class LoginViewController : UIViewController, UITextFieldDelegate {
         } else {
             togglePasswordVisibilityButton.isHidden = true
         }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(true, animated: animated)
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        navigationController?.setNavigationBarHidden(false, animated: animated)
     }
     
     private func enableLoginButton(){

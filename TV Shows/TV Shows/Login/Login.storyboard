@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Y6W-OH-hqX">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="PAs-BU-yNu">
     <device id="retina6_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
@@ -21,13 +21,13 @@
                                 <rect key="frame" x="0.0" y="0.0" width="140" height="100"/>
                             </imageView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic-logo-white" translatesAutoresizingMaskIntoConstraints="NO" id="HAW-YS-vN4">
-                                <rect key="frame" x="127" y="104" width="174" height="39"/>
+                                <rect key="frame" x="127" y="148" width="174" height="39"/>
                             </imageView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="splash-top-right" translatesAutoresizingMaskIntoConstraints="NO" id="pnh-7h-s6Q">
                                 <rect key="frame" x="226" y="0.0" width="202" height="266"/>
                             </imageView>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Dzp-x7-fGw">
-                                <rect key="frame" x="20" y="183" width="388" height="709"/>
+                                <rect key="frame" x="20" y="227" width="388" height="665"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="40" translatesAutoresizingMaskIntoConstraints="NO" id="7po-aS-nC0">
                                         <rect key="frame" x="0.0" y="0.0" width="380" height="429"/>
@@ -42,7 +42,7 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="In order to continue please log in." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1i5-at-37w">
-                                                        <rect key="frame" x="0.0" y="60.666666666666664" width="380" height="20.333333333333336"/>
+                                                        <rect key="frame" x="0.0" y="60.666666666666693" width="380" height="20.333333333333336"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <nil key="highlightedColor"/>
@@ -166,6 +166,9 @@
                                                                 <integer key="value" value="20"/>
                                                             </userDefinedRuntimeAttribute>
                                                         </userDefinedRuntimeAttributes>
+                                                        <connections>
+                                                            <action selector="loginPressed" destination="Y6W-OH-hqX" eventType="touchUpInside" id="ZjW-Dy-RWY"/>
+                                                        </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nmQ-Jm-lMA">
                                                         <rect key="frame" x="0.0" y="65" width="380" height="45"/>
@@ -182,6 +185,9 @@
                                                         <state key="highlighted">
                                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         </state>
+                                                        <connections>
+                                                            <action selector="registerPressed" destination="Y6W-OH-hqX" eventType="touchUpInside" id="N6b-Ir-3gC"/>
+                                                        </connections>
                                                     </button>
                                                 </subviews>
                                             </stackView>
@@ -217,6 +223,7 @@
                             <constraint firstItem="Idd-XC-KaI" firstAttribute="leading" secondItem="5EZ-qb-Rvc" secondAttribute="leading" id="xlc-iR-MnQ"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="mlF-RB-Ak8"/>
                     <connections>
                         <outlet property="emailTextField" destination="RJM-yT-ohI" id="dNf-Th-gCM"/>
                         <outlet property="loginButton" destination="55r-8c-8jE" id="vcp-Bg-vYr"/>
@@ -228,7 +235,25 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="85.514018691588774" y="63.498920086393092"/>
+            <point key="canvasLocation" x="1885.5140186915887" y="63.498920086393092"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="FZb-1O-yPk">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="PAs-BU-yNu" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="D6E-rU-ZkK">
+                        <rect key="frame" x="0.0" y="44" width="428" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="Y6W-OH-hqX" kind="relationship" relationship="rootViewController" id="f73-d7-R3q"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Rhh-mB-cfv" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="985.51401869158872" y="63.498920086393092"/>
         </scene>
     </scenes>
     <resources>
