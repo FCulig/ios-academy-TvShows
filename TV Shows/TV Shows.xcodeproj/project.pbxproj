@@ -74,8 +74,8 @@
 		4215772526975F37008CCFF0 /* TV Shows */ = {
 			isa = PBXGroup;
 			children = (
-				425D40FE26A5CAE8007EFA44 /* Home */,
-				4274C44E269AE0C100D205EE /* Login */,
+				425D412626A601E2007EFA44 /* Views */,
+				425D412526A601CE007EFA44 /* Models */,
 				4215772626975F37008CCFF0 /* AppDelegate.swift */,
 				4215772F26975F3A008CCFF0 /* Assets.xcassets */,
 				4215773126975F3B008CCFF0 /* LaunchScreen.storyboard */,
@@ -91,6 +91,22 @@
 				425D410126A5CB52007EFA44 /* Home.storyboard */,
 			);
 			path = Home;
+			sourceTree = "<group>";
+		};
+		425D412526A601CE007EFA44 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		425D412626A601E2007EFA44 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				425D40FE26A5CAE8007EFA44 /* Home */,
+				4274C44E269AE0C100D205EE /* Login */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 		4274C44E269AE0C100D205EE /* Login */ = {
