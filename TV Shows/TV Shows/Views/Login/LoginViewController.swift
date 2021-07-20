@@ -7,6 +7,8 @@
 
 import Foundation
 import UIKit
+import SVProgressHUD
+import Alamofire
 
 class LoginViewController : UIViewController, UITextFieldDelegate {
     
@@ -20,6 +22,41 @@ class LoginViewController : UIViewController, UITextFieldDelegate {
     override func viewDidLoad(){
         super.viewDidLoad()
         initializeUI()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(true, animated: animated)
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        navigationController?.setNavigationBarHidden(false, animated: animated)
+    }
+    
+    @IBAction private func rememberMePressed() {
+        rememberMeButton.isSelected = !rememberMeButton.isSelected
+    }
+    
+    @IBAction private func togglePasswordVisibilityPressed() {
+        togglePasswordVisibilityButton.isSelected = !togglePasswordVisibilityButton.isSelected
+        passwordTextField.isSecureTextEntry = !passwordTextField.isSecureTextEntry
+    }
+    
+    @objc private func loginFormFieldChanged(_ textField: UITextField) {
+        if emailTextField.text != "" && passwordTextField.text != ""{
+            enableLoginAndRegisterButtons()
+        } else {
+            disableLoginAndRegisterButtons()
+        }
+    }
+    
+    @objc private func passwordFieldChanged(_ textField: UITextField) {
+        if passwordTextField.text != ""{
+            togglePasswordVisibilityButton.isHidden = false
+        } else {
+            togglePasswordVisibilityButton.isHidden = true
+        }
     }
     
     private func initializeUI(){
@@ -37,71 +74,103 @@ class LoginViewController : UIViewController, UITextFieldDelegate {
     
     private func initializeButtons(){
         togglePasswordVisibilityButton.isHidden = true
-        disableLoginButton()
+        disableLoginAndRegisterButtons()
     }
     
     private func setTextFieldPlaceholderColor(_ textField: UITextField){
         textField.attributedPlaceholder = NSAttributedString(string: textField.placeholder!, attributes: [NSAttributedString.Key.foregroundColor: UIColor.init(white: 1, alpha: 0.70)])
     }
     
-    @IBAction private func rememberMePressed() {
-        rememberMeButton.isSelected = !rememberMeButton.isSelected
+    private func enableLoginAndRegisterButtons(){
+        loginButton.isEnabled = true
+        loginButton.backgroundColor = UIColor.init(white: 1, alpha: 1)
+        registerButton.isEnabled = true
     }
     
-    @IBAction private func togglePasswordVisibilityPressed() {
-        togglePasswordVisibilityButton.isSelected = !togglePasswordVisibilityButton.isSelected
-        passwordTextField.isSecureTextEntry = !passwordTextField.isSecureTextEntry
+    private func disableLoginAndRegisterButtons() {
+        loginButton.isEnabled = false
+        loginButton.backgroundColor = UIColor.init(white: 1, alpha: 0.3)
+        registerButton.isEnabled = false
     }
+}
+
+extension LoginViewController {
     
     @IBAction private func loginPressed() {
-        navigateToHomeController()
+        let parameters: [String: String] = [
+            "email": emailTextField.text!,
+            "password": passwordTextField.text!,
+            "password_confirmation": passwordTextField.text!
+        ]
+        
+        loginUser(parameters: parameters)
     }
     
     @IBAction private func registerPressed() {
-       navigateToHomeController()
+        let parameters: [String: String] = [
+            "email": emailTextField.text!,
+            "password": passwordTextField.text!,
+            "password_confirmation": passwordTextField.text!
+        ]
+        
+        registerUser(parameters: parameters)
     }
     
-    private func navigateToHomeController(){
+    private func registerUser(parameters: [String: String]){
+        SVProgressHUD.show()
+        AF
+            .request(
+                "https://tv-shows.infinum.academy/users",
+                method: .post,
+                parameters: parameters,
+                encoder: JSONParameterEncoder.default
+            )
+            .validate()
+            .responseDecodable(of: UserResponse.self) { [weak self] dataResponse in
+                switch dataResponse.result {
+                case .success(_):
+                    SVProgressHUD.showSuccess(withStatus: "Success")
+                    self?.loginUser(parameters: parameters)
+                case .failure(var error):
+                    // TODO: Pokazi error s backenda
+                    SVProgressHUD.showError(withStatus: "Error processing request")
+                }
+            }
+    }
+    
+    private func loginUser(parameters: [String: String]){
+        SVProgressHUD.show()
+        AF
+            .request(
+                "https://tv-shows.infinum.academy/users/sign_in",
+                method: .post,
+                parameters: parameters,
+                encoder: JSONParameterEncoder.default
+            )
+            .validate()
+            .responseDecodable(of: UserResponse.self) { [weak self] dataResponse in
+                switch dataResponse.result {
+                case .success(let userResponse):
+                    let headers = dataResponse.response?.headers.dictionary ?? [:]
+                    self?.handleSuccesfulLogin(for: userResponse.user, headers: headers)
+                case .failure(let error):
+                    SVProgressHUD.showError(withStatus: "Failure")
+                }
+            }
+    }
+    
+    func handleSuccesfulLogin(for user: User, headers: [String: String]) {
+        guard let authInfo = try? AuthInfo(headers: headers) else {
+            SVProgressHUD.showError(withStatus: "Missing headers")
+            return
+        }
+        SVProgressHUD.dismiss()
+        navigateToHomeView()
+    }
+    
+    private func navigateToHomeView(){
         let storyboard = UIStoryboard(name: "Home", bundle: nil)
         let viewControllerD = storyboard.instantiateViewController(withIdentifier: "HomeView")
         navigationController?.pushViewController(viewControllerD, animated: true)
-    }
-    
-    @objc private func loginFormFieldChanged(_ textField: UITextField) {
-        if emailTextField.text != "" && passwordTextField.text != ""{
-           enableLoginButton()
-        } else {
-            disableLoginButton()
-        }
-    }
-    
-    @objc private func passwordFieldChanged(_ textField: UITextField) {
-        if passwordTextField.text != ""{
-            togglePasswordVisibilityButton.isHidden = false
-        } else {
-            togglePasswordVisibilityButton.isHidden = true
-        }
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        navigationController?.setNavigationBarHidden(true, animated: animated)
-    }
-
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        navigationController?.setNavigationBarHidden(false, animated: animated)
-    }
-    
-    private func enableLoginButton(){
-        loginButton.isEnabled = true
-        loginButton.backgroundColor = UIColor.init(white: 1, alpha: 1)
-        registerButton.alpha = 1
-    }
-    
-    private func disableLoginButton() {
-        loginButton.isEnabled = false
-        loginButton.backgroundColor = UIColor.init(white: 1, alpha: 0.3)
-        registerButton.alpha = 0.7
     }
 }
