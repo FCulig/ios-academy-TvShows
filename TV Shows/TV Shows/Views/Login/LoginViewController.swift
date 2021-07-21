@@ -50,11 +50,11 @@ class LoginViewController : UIViewController, UITextFieldDelegate {
     }
     
     @IBAction private func loginPressed() {
-        AuthenticationService.loginUser(email: emailTextField.text!, password: passwordTextField.text!) //, onSuccess: navigateToHomeView
+        loginUser(email: emailTextField.text!, password: passwordTextField.text!)
     }
     
     @IBAction private func registerPressed() {
-        //AuthenticationService.registerUser(email: emailTextField.text!, password: passwordTextField.text!)
+        registerUser(email: emailTextField.text!, password: passwordTextField.text!)
     }
     
     @objc private func loginFormFieldChanged(_ textField: UITextField) {
@@ -114,13 +114,30 @@ class LoginViewController : UIViewController, UITextFieldDelegate {
 
 extension LoginViewController {
     
-    func handleSuccesfulLogin(for user: User, headers: [String: String]) {
-        guard let authInfo = try? AuthInfo(headers: headers) else {
+    // Mark: - Handling login and register actions
+    
+    private func loginUser(email: String, password: String){
+        AuthenticationService.loginUser(email: email, password: password, onSuccess: handleSuccessfulLogin)
+    }
+    
+    private func registerUser(email: String, password: String){
+        AuthenticationService.registerUser(email: email, password: password, onSuccess: handleSuccessfulRegistration)
+    }
+    
+    private func handleSuccessfulLogin(response: DataResponse<UserResponse, AFError>){
+        let headers = response.response?.headers.dictionary ?? [:]
+        guard let authHeaders = try? AuthInfo(headers: headers) else {
             SVProgressHUD.showError(withStatus: "Missing headers")
             return
         }
+        APIManager.shared.headers = authHeaders
         SVProgressHUD.dismiss()
         navigateToHomeView()
+    }
+    
+    private func handleSuccessfulRegistration(response: DataResponse<UserResponse, AFError>){
+        SVProgressHUD.dismiss()
+        loginPressed()
     }
     
     // MARK: - Navigation

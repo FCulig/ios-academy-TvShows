@@ -7,18 +7,18 @@
 
 import Foundation
 import Alamofire
+import SVProgressHUD
 
 final class APIManager {
     
     // MARK: - Lets and vars
 
     static let shared = APIManager()
+    var headers: AuthInfo?
 
     // MARK: - Initializer
     
-    private init() {
-        
-    }
+    private init() { }
     
     func request<T: Decodable>(
         url: String,
@@ -43,6 +43,7 @@ final class APIManager {
                 case .failure(let error):
                     print(error)
                     //errorHandler(error)
+                    SVProgressHUD.showError(withStatus: "Ooops something went wrong...")
                 }
             }
     }
