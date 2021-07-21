@@ -8,12 +8,16 @@
 import Foundation
 
 struct AuthInfo: Codable {
+    
+    // MARK: - Vars & Lets
 
     let accessToken: String
     let client: String
     let tokenType: String
     let expiry: String
     let uid: String
+    
+    // MARK: - CodingKey
 
     enum CodingKeys: String, CodingKey {
         case accessToken = "access-token"
@@ -22,6 +26,8 @@ struct AuthInfo: Codable {
         case expiry = "expiry"
         case uid = "uid"
     }
+    
+    // MARK: - Initializer
     
     init(headers: [String: String]) throws {
         let data = try JSONSerialization.data(withJSONObject: headers, options: .prettyPrinted)

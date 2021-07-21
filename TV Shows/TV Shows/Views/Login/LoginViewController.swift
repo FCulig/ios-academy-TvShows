@@ -12,12 +12,16 @@ import Alamofire
 
 class LoginViewController : UIViewController, UITextFieldDelegate {
     
+    // MARK: - IBOutlets
+    
     @IBOutlet private weak var emailTextField: UITextField!
     @IBOutlet private weak var passwordTextField: UITextField!
     @IBOutlet private weak var togglePasswordVisibilityButton: UIButton!
     @IBOutlet private weak var rememberMeButton: UIButton!
     @IBOutlet private weak var loginButton: UIButton!
     @IBOutlet private weak var registerButton: UIButton!
+    
+    // MARK: - Overrides
     
     override func viewDidLoad(){
         super.viewDidLoad()
@@ -34,6 +38,8 @@ class LoginViewController : UIViewController, UITextFieldDelegate {
         navigationController?.setNavigationBarHidden(false, animated: animated)
     }
     
+    // MARK: - IBActions
+    
     @IBAction private func rememberMePressed() {
         rememberMeButton.isSelected = !rememberMeButton.isSelected
     }
@@ -41,6 +47,14 @@ class LoginViewController : UIViewController, UITextFieldDelegate {
     @IBAction private func togglePasswordVisibilityPressed() {
         togglePasswordVisibilityButton.isSelected = !togglePasswordVisibilityButton.isSelected
         passwordTextField.isSecureTextEntry = !passwordTextField.isSecureTextEntry
+    }
+    
+    @IBAction private func loginPressed() {
+        AuthenticationService.loginUser(email: emailTextField.text!, password: passwordTextField.text!) //, onSuccess: navigateToHomeView
+    }
+    
+    @IBAction private func registerPressed() {
+        //AuthenticationService.registerUser(email: emailTextField.text!, password: passwordTextField.text!)
     }
     
     @objc private func loginFormFieldChanged(_ textField: UITextField) {
@@ -58,6 +72,8 @@ class LoginViewController : UIViewController, UITextFieldDelegate {
             togglePasswordVisibilityButton.isHidden = true
         }
     }
+    
+    // MARK: - UI initialization
     
     private func initializeUI(){
         initializeTextFields()
@@ -81,6 +97,8 @@ class LoginViewController : UIViewController, UITextFieldDelegate {
         textField.attributedPlaceholder = NSAttributedString(string: textField.placeholder!, attributes: [NSAttributedString.Key.foregroundColor: UIColor.init(white: 1, alpha: 0.70)])
     }
     
+    // MARK: - Login and register button controls
+    
     private func enableLoginAndRegisterButtons(){
         loginButton.isEnabled = true
         loginButton.backgroundColor = UIColor.init(white: 1, alpha: 1)
@@ -96,69 +114,6 @@ class LoginViewController : UIViewController, UITextFieldDelegate {
 
 extension LoginViewController {
     
-    @IBAction private func loginPressed() {
-        let parameters: [String: String] = [
-            "email": emailTextField.text!,
-            "password": passwordTextField.text!,
-            "password_confirmation": passwordTextField.text!
-        ]
-        
-        loginUser(parameters: parameters)
-    }
-    
-    @IBAction private func registerPressed() {
-        let parameters: [String: String] = [
-            "email": emailTextField.text!,
-            "password": passwordTextField.text!,
-            "password_confirmation": passwordTextField.text!
-        ]
-        
-        registerUser(parameters: parameters)
-    }
-    
-    private func registerUser(parameters: [String: String]){
-        SVProgressHUD.show()
-        AF
-            .request(
-                "https://tv-shows.infinum.academy/users",
-                method: .post,
-                parameters: parameters,
-                encoder: JSONParameterEncoder.default
-            )
-            .validate()
-            .responseDecodable(of: UserResponse.self) { [weak self] dataResponse in
-                switch dataResponse.result {
-                case .success(_):
-                    SVProgressHUD.showSuccess(withStatus: "Success")
-                    self?.loginUser(parameters: parameters)
-                case .failure(var error):
-                    // TODO: Pokazi error s backenda
-                    SVProgressHUD.showError(withStatus: "Error processing request")
-                }
-            }
-    }
-    
-    private func loginUser(parameters: [String: String]){
-        SVProgressHUD.show()
-        AF
-            .request(
-                "https://tv-shows.infinum.academy/users/sign_in",
-                method: .post,
-                parameters: parameters,
-                encoder: JSONParameterEncoder.default
-            )
-            .validate()
-            .responseDecodable(of: UserResponse.self) { [weak self] dataResponse in
-                switch dataResponse.result {
-                case .success(let userResponse):
-                    let headers = dataResponse.response?.headers.dictionary ?? [:]
-                    self?.handleSuccesfulLogin(for: userResponse.user, headers: headers)
-                case .failure(let error):
-                    SVProgressHUD.showError(withStatus: "Failure")
-                }
-            }
-    }
-    
     func handleSuccesfulLogin(for user: User, headers: [String: String]) {
         guard let authInfo = try? AuthInfo(headers: headers) else {
             SVProgressHUD.showError(withStatus: "Missing headers")
@@ -167,6 +122,8 @@ extension LoginViewController {
         SVProgressHUD.dismiss()
         navigateToHomeView()
     }
+    
+    // MARK: - Navigation
     
     private func navigateToHomeView(){
         let storyboard = UIStoryboard(name: "Home", bundle: nil)
