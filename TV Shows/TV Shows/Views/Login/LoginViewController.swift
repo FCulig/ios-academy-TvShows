@@ -21,12 +21,12 @@ class LoginViewController : UIViewController, UITextFieldDelegate {
     @IBOutlet private weak var loginButton: UIButton!
     @IBOutlet private weak var registerButton: UIButton!
     
-    // MARK: - Overrides
-    
     override func viewDidLoad(){
         super.viewDidLoad()
         initializeUI()
     }
+    
+    // MARK: - Overrides to remove navigation bar from login screen
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -57,7 +57,7 @@ class LoginViewController : UIViewController, UITextFieldDelegate {
         registerUser(email: emailTextField.text!, password: passwordTextField.text!)
     }
     
-    @objc private func loginFormFieldChanged(_ textField: UITextField) {
+    @IBAction private func emailFieldChanged() {
         if emailTextField.text != "" && passwordTextField.text != ""{
             enableLoginAndRegisterButtons()
         } else {
@@ -65,11 +65,17 @@ class LoginViewController : UIViewController, UITextFieldDelegate {
         }
     }
     
-    @objc private func passwordFieldChanged(_ textField: UITextField) {
+    @IBAction private func passwordFieldChanged() {
         if passwordTextField.text != ""{
             togglePasswordVisibilityButton.isHidden = false
         } else {
             togglePasswordVisibilityButton.isHidden = true
+        }
+        
+        if emailTextField.text != "" && passwordTextField.text != ""{
+            enableLoginAndRegisterButtons()
+        } else {
+            disableLoginAndRegisterButtons()
         }
     }
     
@@ -83,9 +89,6 @@ class LoginViewController : UIViewController, UITextFieldDelegate {
     private func initializeTextFields(){
         setTextFieldPlaceholderColor(emailTextField)
         setTextFieldPlaceholderColor(passwordTextField)
-        emailTextField.addTarget(self, action: #selector(loginFormFieldChanged(_:)), for: .editingChanged)
-        passwordTextField.addTarget(self, action: #selector(loginFormFieldChanged(_:)), for: .editingChanged)
-        passwordTextField.addTarget(self, action: #selector(passwordFieldChanged(_:)), for: .editingChanged)
     }
     
     private func initializeButtons(){
