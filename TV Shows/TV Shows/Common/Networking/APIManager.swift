@@ -21,17 +21,16 @@ final class APIManager {
     private init() { }
     
     func request<T: Decodable>(
-        url: String,
-        parameters: [String: String],
-        method: HTTPMethod,
+        type: EndPointType,
         responseDecodableType: T.Type,
+        parameters: [String: String],
         succsessHandler: @escaping (_ response: DataResponse<T, AFError>) -> Void
         //errorHandler: @escaping (_ response: AFError) -> Void
     ) {
         AF
             .request(
-                url,
-                method: method,
+                type.url,
+                method: type.method,
                 parameters: parameters,
                 encoder: JSONParameterEncoder.default
             )

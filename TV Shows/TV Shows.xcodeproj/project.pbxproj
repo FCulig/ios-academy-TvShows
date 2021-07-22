@@ -17,6 +17,8 @@
 		425D412C26A68FF9007EFA44 /* UserResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 425D412B26A68FF9007EFA44 /* UserResponse.swift */; };
 		425D413726A7E25D007EFA44 /* AuthenticationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 425D413626A7E25D007EFA44 /* AuthenticationService.swift */; };
 		425D413926A86D84007EFA44 /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 425D413826A86D84007EFA44 /* APIManager.swift */; };
+		425D415F26A8A9FC007EFA44 /* EndPointType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 425D415E26A8A9FC007EFA44 /* EndPointType.swift */; };
+		425D416226A8B29A007EFA44 /* AuthRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 425D416126A8B29A007EFA44 /* AuthRoute.swift */; };
 		4274C450269AE0F800D205EE /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4274C44F269AE0F800D205EE /* Login.storyboard */; };
 		4274C452269AE10E00D205EE /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4274C451269AE10E00D205EE /* LoginViewController.swift */; };
 		906B511FC4724AD786E6DFA2 /* Pods_TV_Shows.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05BDDA4BAE296372D8790DEE /* Pods_TV_Shows.framework */; };
@@ -36,6 +38,8 @@
 		425D412B26A68FF9007EFA44 /* UserResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserResponse.swift; sourceTree = "<group>"; };
 		425D413626A7E25D007EFA44 /* AuthenticationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationService.swift; sourceTree = "<group>"; };
 		425D413826A86D84007EFA44 /* APIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
+		425D415E26A8A9FC007EFA44 /* EndPointType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndPointType.swift; sourceTree = "<group>"; };
+		425D416126A8B29A007EFA44 /* AuthRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthRoute.swift; sourceTree = "<group>"; };
 		4274C44F269AE0F800D205EE /* Login.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
 		4274C451269AE10E00D205EE /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		98A58600877FE61D65834300 /* Pods-TV Shows.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TV Shows.release.xcconfig"; path = "Target Support Files/Pods-TV Shows/Pods-TV Shows.release.xcconfig"; sourceTree = "<group>"; };
@@ -84,7 +88,7 @@
 		4215772526975F37008CCFF0 /* TV Shows */ = {
 			isa = PBXGroup;
 			children = (
-				425D412D26A75490007EFA44 /* Services */,
+				425D416026A8B252007EFA44 /* Common */,
 				425D412626A601E2007EFA44 /* Views */,
 				425D412526A601CE007EFA44 /* Models */,
 				4215772626975F37008CCFF0 /* AppDelegate.swift */,
@@ -126,7 +130,6 @@
 		425D412D26A75490007EFA44 /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				425D412E26A758D1007EFA44 /* Networking */,
 				425D413626A7E25D007EFA44 /* AuthenticationService.swift */,
 			);
 			path = Services;
@@ -136,8 +139,19 @@
 			isa = PBXGroup;
 			children = (
 				425D413826A86D84007EFA44 /* APIManager.swift */,
+				425D415E26A8A9FC007EFA44 /* EndPointType.swift */,
+				425D416126A8B29A007EFA44 /* AuthRoute.swift */,
 			);
 			path = Networking;
+			sourceTree = "<group>";
+		};
+		425D416026A8B252007EFA44 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				425D412E26A758D1007EFA44 /* Networking */,
+				425D412D26A75490007EFA44 /* Services */,
+			);
+			path = Common;
 			sourceTree = "<group>";
 		};
 		4274C44E269AE0C100D205EE /* Login */ = {
@@ -274,8 +288,10 @@
 			files = (
 				425D413926A86D84007EFA44 /* APIManager.swift in Sources */,
 				425D412826A609C3007EFA44 /* User.swift in Sources */,
+				425D415F26A8A9FC007EFA44 /* EndPointType.swift in Sources */,
 				4274C452269AE10E00D205EE /* LoginViewController.swift in Sources */,
 				425D412A26A68FD2007EFA44 /* AuthInfo.swift in Sources */,
+				425D416226A8B29A007EFA44 /* AuthRoute.swift in Sources */,
 				4215772726975F37008CCFF0 /* AppDelegate.swift in Sources */,
 				425D410026A5CB1C007EFA44 /* HomeViewController.swift in Sources */,
 				425D412C26A68FF9007EFA44 /* UserResponse.swift in Sources */,

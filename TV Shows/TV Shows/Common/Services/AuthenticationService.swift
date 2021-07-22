@@ -21,10 +21,9 @@ final class AuthenticationService {
         ]
         
         APIManager.shared.request(
-            url: "https://tv-shows.infinum.academy/users",
-            parameters: parameters,
-            method: .post,
+            type: AuthRoute.regiser,
             responseDecodableType: UserResponse.self,
+            parameters: parameters,
             succsessHandler: onSuccess
         )
     }
@@ -38,10 +37,9 @@ final class AuthenticationService {
         ]
         
         APIManager.shared.request(
-            url: "https://tv-shows.infinum.academy/users/sign_in",
-            parameters: parameters,
-            method: .post,
+            type: AuthRoute.login,
             responseDecodableType: UserResponse.self,
+            parameters: parameters,
             succsessHandler: onSuccess
         )
     }
