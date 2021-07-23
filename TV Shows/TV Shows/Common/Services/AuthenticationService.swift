@@ -11,7 +11,7 @@ import Alamofire
 
 final class AuthenticationService {
     
-    static func registerUser(email: String, password: String, onSuccess: @escaping (_ response: DataResponse<UserResponse, AFError>) -> Void){
+    static func registerUser(email: String, password: String, onSuccess: @escaping (_ response: DataResponse<UserResponse, AFError>) -> Void) {
         SVProgressHUD.show()
         
         let parameters: [String: String] = [
@@ -28,7 +28,7 @@ final class AuthenticationService {
         )
     }
     
-    static func loginUser(email: String, password: String, onSuccess: @escaping (_ response: DataResponse<UserResponse, AFError>) -> Void){
+    static func loginUser(email: String, password: String, onSuccess: @escaping (_ response: DataResponse<UserResponse, AFError>) -> Void) {
         SVProgressHUD.show()
         
         let parameters: [String: String] = [
