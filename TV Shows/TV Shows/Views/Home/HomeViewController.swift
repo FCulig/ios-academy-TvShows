@@ -13,4 +13,11 @@ class HomeViewController : UIViewController {
     override func viewDidLoad(){
         super.viewDidLoad()
     }
+    
+    // MARK: - Show navigation bar
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        navigationController?.setNavigationBarHidden(false, animated: animated)
+    }
 }

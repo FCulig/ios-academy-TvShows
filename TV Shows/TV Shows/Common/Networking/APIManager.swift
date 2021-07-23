@@ -21,19 +21,12 @@ final class APIManager {
     private init() { }
     
     func request<T: Decodable>(
-        type: EndPointType,
+        endpoint: EndPointType,
         responseDecodableType: T.Type,
-        parameters: [String: String],
         succsessHandler: @escaping (_ response: DataResponse<T, AFError>) -> Void
-        //errorHandler: @escaping (_ response: AFError) -> Void
     ) {
         AF
-            .request(
-                type.url,
-                method: type.method,
-                parameters: parameters,
-                encoder: JSONParameterEncoder.default
-            )
+            .request(endpoint)
             .validate()
             .responseDecodable(of: responseDecodableType) { dataResponse in
                 switch dataResponse.result {
@@ -41,7 +34,6 @@ final class APIManager {
                     succsessHandler(dataResponse)
                 case .failure(let error):
                     print(error)
-                    //errorHandler(error)
                     SVProgressHUD.showError(withStatus: "Ooops something went wrong...")
                 }
             }

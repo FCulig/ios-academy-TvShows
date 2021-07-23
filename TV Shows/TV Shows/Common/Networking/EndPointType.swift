@@ -7,7 +7,7 @@
 
 import Alamofire
 
-protocol EndPointType {
+protocol EndPointType : URLRequestConvertible{
     
     // MARK: - Vars & Lets
         
@@ -15,6 +15,7 @@ protocol EndPointType {
     var path: String { get }
     var method: HTTPMethod { get }
     var url: URL { get }
+    var parameters: Parameters? { get }
     
 }
 

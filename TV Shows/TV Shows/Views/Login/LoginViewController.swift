@@ -26,16 +26,11 @@ class LoginViewController : UIViewController {
         initializeUI()
     }
     
-    // MARK: - Overrides to remove navigation bar from login screen
+    // MARK: - Hide navigation bar
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(true, animated: animated)
-    }
-
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        navigationController?.setNavigationBarHidden(false, animated: animated)
     }
 
 }
@@ -54,11 +49,27 @@ private extension LoginViewController {
     }
     
     @IBAction func loginPressed() {
-        loginUser(email: emailTextField.text!, password: passwordTextField.text!)
+        guard
+            let email = emailTextField.text,
+            let password = passwordTextField.text,
+            !email.isEmpty,
+            !password.isEmpty
+        else {
+            return
+        }
+        loginUser(email: email, password: password)
     }
     
     @IBAction func registerPressed() {
-        registerUser(email: emailTextField.text!, password: passwordTextField.text!)
+        guard
+            let email = emailTextField.text,
+            let password = passwordTextField.text,
+            !email.isEmpty,
+            !password.isEmpty
+        else {
+            return
+        }
+        registerUser(email: email, password: password)
     }
     
     @IBAction func emailFieldChanged() {
@@ -90,11 +101,19 @@ private extension LoginViewController {
 private extension LoginViewController {
     
     func loginUser(email: String, password: String) {
-        AuthenticationService.loginUser(email: email, password: password, onSuccess: handleSuccessfulLogin)
+        SVProgressHUD.show()
+        AuthenticationService.loginUser(email: email, password: password) { [weak self] response in
+            guard let self = self else { return }
+            self.handleSuccessfulLogin(response: response)
+        }
     }
     
     func registerUser(email: String, password: String) {
-        AuthenticationService.registerUser(email: email, password: password, onSuccess: handleSuccessfulRegistration)
+        SVProgressHUD.show()
+        AuthenticationService.registerUser(email: email, password: password) { [weak self] response in
+            guard let self = self else { return }
+            self.handleSuccessfulRegistration(response: response)
+        }
     }
     
     func handleSuccessfulLogin(response: DataResponse<UserResponse, AFError>) {
@@ -115,7 +134,7 @@ private extension LoginViewController {
     
     func navigateToHomeView() {
         let storyboard = UIStoryboard(name: "Home", bundle: nil)
-        let viewControllerD = storyboard.instantiateViewController(withIdentifier: "HomeView")
+        let viewControllerD = storyboard.instantiateViewController(withIdentifier: "HomeViewController")
         navigationController?.pushViewController(viewControllerD, animated: true)
     }
 }

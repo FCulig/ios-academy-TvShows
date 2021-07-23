@@ -12,34 +12,17 @@ import Alamofire
 final class AuthenticationService {
     
     static func registerUser(email: String, password: String, onSuccess: @escaping (_ response: DataResponse<UserResponse, AFError>) -> Void) {
-        SVProgressHUD.show()
-        
-        let parameters: [String: String] = [
-            "email": email,
-            "password": password,
-            "password_confirmation": password
-        ]
-        
         APIManager.shared.request(
-            type: AuthRoute.regiser,
+            endpoint: AuthRoute.register(email: email, password: password),
             responseDecodableType: UserResponse.self,
-            parameters: parameters,
             succsessHandler: onSuccess
         )
     }
     
     static func loginUser(email: String, password: String, onSuccess: @escaping (_ response: DataResponse<UserResponse, AFError>) -> Void) {
-        SVProgressHUD.show()
-        
-        let parameters: [String: String] = [
-            "email": email,
-            "password": password
-        ]
-        
         APIManager.shared.request(
-            type: AuthRoute.login,
+            endpoint: AuthRoute.login(email: email, password: password),
             responseDecodableType: UserResponse.self,
-            parameters: parameters,
             succsessHandler: onSuccess
         )
     }
