@@ -118,13 +118,29 @@ private extension LoginViewController {
     
     func handleSuccessfulLogin(response: DataResponse<UserResponse, AFError>) {
         let headers = response.response?.headers.dictionary ?? [:]
-        guard let authHeaders = try? AuthInfo(headers: headers) else {
-            SVProgressHUD.showError(withStatus: "Missing headers")
+        
+        guard
+            let authHeaders = try? AuthInfo(headers: headers)
+        else {
+            SVProgressHUD.showError(withStatus: "Error while trying to login")
             return
         }
-        APIManager.shared.headers = authHeaders
-        SVProgressHUD.dismiss()
-        navigateToHomeView()
+        
+        switch response.result {
+        case .success(let userData):
+            let storyboard = UIStoryboard(name: "Home", bundle: nil)
+            let homeViewController = storyboard.instantiateViewController(
+                withIdentifier: String(describing: HomeViewController.self)
+            ) as! HomeViewController
+            homeViewController.userResponse = userData
+            APIManager.shared.headers = authHeaders
+            SVProgressHUD.dismiss()
+            navigateToViewController(viewController: homeViewController)
+        default:
+            SVProgressHUD.showError(withStatus: "Error while trying to login")
+            return
+        }
+        
     }
     
     private func handleSuccessfulRegistration(response: DataResponse<UserResponse, AFError>) {
@@ -132,10 +148,8 @@ private extension LoginViewController {
         loginPressed()
     }
     
-    func navigateToHomeView() {
-        let storyboard = UIStoryboard(name: "Home", bundle: nil)
-        let viewControllerD = storyboard.instantiateViewController(withIdentifier: "HomeViewController")
-        navigationController?.pushViewController(viewControllerD, animated: true)
+    func navigateToViewController(viewController: UIViewController) {
+        navigationController?.pushViewController(viewController, animated: true)
     }
 }
 

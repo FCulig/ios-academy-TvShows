@@ -10,6 +10,8 @@ import UIKit
 
 class HomeViewController : UIViewController {
     
+    var userResponse: UserResponse?
+    
     override func viewDidLoad(){
         super.viewDidLoad()
     }
