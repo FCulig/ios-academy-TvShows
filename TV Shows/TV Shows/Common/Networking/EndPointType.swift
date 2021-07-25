@@ -14,6 +14,7 @@ protocol EndPointType : URLRequestConvertible{
     var baseURL: String { get }
     var path: String { get }
     var method: HTTPMethod { get }
+    var headers: HTTPHeaders { get }
     var url: URL { get }
     var parameters: Parameters? { get }
     
@@ -32,6 +33,16 @@ extension EndPointType {
     var url: URL {
         get {
             URL(string: self.baseURL + self.path)!
+        }
+    }
+    
+    var headers: HTTPHeaders {
+        get {
+            if let headers = APIManager.shared.authInfo?.headers {
+                return HTTPHeaders(headers)
+            } else {
+                return HTTPHeaders()
+            }
         }
     }
     

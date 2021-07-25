@@ -14,7 +14,7 @@ final class APIManager {
     // MARK: - Lets and vars
 
     static let shared = APIManager()
-    var headers: AuthInfo?
+    var authInfo: AuthInfo?
 
     // MARK: - Initializer
     

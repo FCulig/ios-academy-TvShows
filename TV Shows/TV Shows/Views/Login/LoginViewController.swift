@@ -24,6 +24,7 @@ class LoginViewController : UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         initializeUI()
+        loginUser(email: "filip.culig@gmail.com", password: "123321")
     }
     
     // MARK: - Hide navigation bar
@@ -120,7 +121,7 @@ private extension LoginViewController {
         let headers = response.response?.headers.dictionary ?? [:]
         
         guard
-            let authHeaders = try? AuthInfo(headers: headers)
+            let authInfo = try? AuthInfo(headers: headers)
         else {
             SVProgressHUD.showError(withStatus: "Error while trying to login")
             return
@@ -133,7 +134,7 @@ private extension LoginViewController {
                 withIdentifier: String(describing: HomeViewController.self)
             ) as! HomeViewController
             homeViewController.userResponse = userData
-            APIManager.shared.headers = authHeaders
+            APIManager.shared.authInfo = authInfo
             SVProgressHUD.dismiss()
             navigateToViewController(viewController: homeViewController)
         default:
