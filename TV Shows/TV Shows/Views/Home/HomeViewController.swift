@@ -14,10 +14,10 @@ class HomeViewController : UIViewController {
     // MARK: Lets and vars
     
     var userResponse: UserResponse?
+    private var paginationInfo: Pagination?
     private var shows: [Show] = []
-    private let incrementSize: Int = 20
     private var page: Int = 1
-    private var items: Int = 20
+    private let items: Int = 20
     private var isFetchingShows: Bool = false
     
     // MARK: IBOutlets
@@ -78,7 +78,6 @@ extension HomeViewController: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         if shouldFetchShows(scrollView: scrollView) {
             page += 1
-            items += incrementSize
             getTVShows(page: page, items: items)
         }
     }
@@ -86,7 +85,8 @@ extension HomeViewController: UIScrollViewDelegate {
     private func shouldFetchShows(scrollView: UIScrollView) -> Bool {
         let position = scrollView.contentOffset.y
         let currentHeight = tableView.contentSize.height - 100 - scrollView.frame.height
-        return position > currentHeight && isFetchingShows == false
+        guard let totalPages = paginationInfo?.pages else { return false }
+        return position > currentHeight && !isFetchingShows && totalPages > page
     }
     
 }
@@ -100,19 +100,18 @@ private extension HomeViewController {
         SVProgressHUD.show()
         isFetchingShows = true
         ShowsService.getShows(page: page, items: items) { [weak self] response in
-            guard let self = self else { return }
-            // print(response.result)
-            SVProgressHUD.dismiss()
-            self.isFetchingShows = false
-            
-            switch response.result {
-            case .success(let showData):
-                self.shows += showData.shows
-            default:
-                SVProgressHUD.showError(withStatus: "Error while trying to login")
+            guard
+                let self = self,
+                let shows = try? response.result.get().shows,
+                let paginationInfo = try? response.result.get().meta.pagination
+            else {
+                SVProgressHUD.showError(withStatus: "Error while fetching shows")
                 return
             }
-            
+            SVProgressHUD.dismiss()
+            self.isFetchingShows = false
+            self.shows += shows
+            self.paginationInfo = paginationInfo
             self.tableView.reloadData()
         }
     }

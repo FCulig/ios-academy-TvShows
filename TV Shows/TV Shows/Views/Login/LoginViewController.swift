@@ -24,7 +24,6 @@ class LoginViewController : UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         initializeUI()
-        loginUser(email: "filip.culig@gmail.com", password: "123321")
     }
     
     // MARK: - Hide navigation bar
@@ -121,27 +120,26 @@ private extension LoginViewController {
         let headers = response.response?.headers.dictionary ?? [:]
         
         guard
+            let userData = try? response.result.get(),
             let authInfo = try? AuthInfo(headers: headers)
         else {
             SVProgressHUD.showError(withStatus: "Error while trying to login")
             return
         }
         
-        switch response.result {
-        case .success(let userData):
-            let storyboard = UIStoryboard(name: "Home", bundle: nil)
-            let homeViewController = storyboard.instantiateViewController(
-                withIdentifier: String(describing: HomeViewController.self)
-            ) as! HomeViewController
-            homeViewController.userResponse = userData
-            APIManager.shared.authInfo = authInfo
-            SVProgressHUD.dismiss()
-            navigateToViewController(viewController: homeViewController)
-        default:
-            SVProgressHUD.showError(withStatus: "Error while trying to login")
-            return
-        }
+        APIManager.shared.authInfo = authInfo
         
+        let homeViewController = instantiateHomeViewController(userData: userData)
+        navigateToViewController(viewController: homeViewController)
+    }
+    
+    private func instantiateHomeViewController(userData: UserResponse?) -> HomeViewController {
+        let storyboard = UIStoryboard(name: "Home", bundle: nil)
+        let homeViewController = storyboard.instantiateViewController(
+            withIdentifier: String(describing: HomeViewController.self)
+        ) as! HomeViewController
+        homeViewController.userResponse = userData
+        return homeViewController
     }
     
     private func handleSuccessfulRegistration(response: DataResponse<UserResponse, AFError>) {
