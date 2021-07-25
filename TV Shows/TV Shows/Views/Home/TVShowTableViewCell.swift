@@ -9,9 +9,19 @@ import UIKit
 
 class TVShowTableViewCell: UITableViewCell {
 
-    @IBOutlet weak var showNameLabel: UILabel!
+    @IBOutlet private weak var showTitleLabel: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
     }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        showTitleLabel.text = ""
+    }
+    
+    func configure(show: Show){
+        showTitleLabel.text = show.title
+    }
+    
 }

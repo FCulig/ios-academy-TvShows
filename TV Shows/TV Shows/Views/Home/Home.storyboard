@@ -42,7 +42,7 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <outlet property="showNameLabel" destination="24I-HS-CDW" id="jEH-Yf-yAh"/>
+                                            <outlet property="showTitleLabel" destination="24I-HS-CDW" id="Prg-dh-uBd"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>

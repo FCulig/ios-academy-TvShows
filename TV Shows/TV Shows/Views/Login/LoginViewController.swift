@@ -150,7 +150,7 @@ private extension LoginViewController {
     }
     
     func navigateToViewController(viewController: UIViewController) {
-        navigationController?.pushViewController(viewController, animated: true)
+        navigationController?.setViewControllers([viewController], animated: true)
     }
 }
 
