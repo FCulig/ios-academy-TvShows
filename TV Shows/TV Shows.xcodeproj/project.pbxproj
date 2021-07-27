@@ -10,6 +10,14 @@
 		4215772726975F37008CCFF0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4215772626975F37008CCFF0 /* AppDelegate.swift */; };
 		4215773026975F3B008CCFF0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4215772F26975F3A008CCFF0 /* Assets.xcassets */; };
 		4215773326975F3B008CCFF0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4215773126975F3B008CCFF0 /* LaunchScreen.storyboard */; };
+		42215DCC26AE796700316FE2 /* ShowDetailsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42215DCB26AE796700316FE2 /* ShowDetailsController.swift */; };
+		42215DCE26AE797900316FE2 /* ShowDetails.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 42215DCD26AE797900316FE2 /* ShowDetails.storyboard */; };
+		42215DD026AF3EF600316FE2 /* TVShowDetailsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42215DCF26AF3EF600316FE2 /* TVShowDetailsTableViewCell.swift */; };
+		42215DD226AF3F4A00316FE2 /* TVShowReviewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42215DD126AF3F4A00316FE2 /* TVShowReviewTableViewCell.swift */; };
+		42215DD426B08A3900316FE2 /* ReviewsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42215DD326B08A3900316FE2 /* ReviewsResponse.swift */; };
+		42215DD626B08A4500316FE2 /* Review.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42215DD526B08A4500316FE2 /* Review.swift */; };
+		42215DD826B08B3300316FE2 /* ReviewsRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42215DD726B08B3300316FE2 /* ReviewsRoute.swift */; };
+		42215DDA26B08C0200316FE2 /* ReviewsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42215DD926B08C0200316FE2 /* ReviewsService.swift */; };
 		424CED6A26ACAC9200BB7AFB /* TVShowTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 424CED6926ACAC9200BB7AFB /* TVShowTableViewCell.swift */; };
 		424CED6C26ACAF9200BB7AFB /* ShowsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 424CED6B26ACAF9200BB7AFB /* ShowsService.swift */; };
 		424CED6E26AD3E1400BB7AFB /* ShowsRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 424CED6D26AD3E1400BB7AFB /* ShowsRoute.swift */; };
@@ -38,6 +46,14 @@
 		4215772F26975F3A008CCFF0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4215773226975F3B008CCFF0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4215773426975F3B008CCFF0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		42215DCB26AE796700316FE2 /* ShowDetailsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowDetailsController.swift; sourceTree = "<group>"; };
+		42215DCD26AE797900316FE2 /* ShowDetails.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ShowDetails.storyboard; sourceTree = "<group>"; };
+		42215DCF26AF3EF600316FE2 /* TVShowDetailsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVShowDetailsTableViewCell.swift; sourceTree = "<group>"; };
+		42215DD126AF3F4A00316FE2 /* TVShowReviewTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVShowReviewTableViewCell.swift; sourceTree = "<group>"; };
+		42215DD326B08A3900316FE2 /* ReviewsResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewsResponse.swift; sourceTree = "<group>"; };
+		42215DD526B08A4500316FE2 /* Review.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Review.swift; sourceTree = "<group>"; };
+		42215DD726B08B3300316FE2 /* ReviewsRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewsRoute.swift; sourceTree = "<group>"; };
+		42215DD926B08C0200316FE2 /* ReviewsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewsService.swift; sourceTree = "<group>"; };
 		424CED6926ACAC9200BB7AFB /* TVShowTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVShowTableViewCell.swift; sourceTree = "<group>"; };
 		424CED6B26ACAF9200BB7AFB /* ShowsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowsService.swift; sourceTree = "<group>"; };
 		424CED6D26AD3E1400BB7AFB /* ShowsRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowsRoute.swift; sourceTree = "<group>"; };
@@ -113,6 +129,17 @@
 			path = "TV Shows";
 			sourceTree = "<group>";
 		};
+		42215DCA26AE793E00316FE2 /* ShowDetails */ = {
+			isa = PBXGroup;
+			children = (
+				42215DCB26AE796700316FE2 /* ShowDetailsController.swift */,
+				42215DCD26AE797900316FE2 /* ShowDetails.storyboard */,
+				42215DCF26AF3EF600316FE2 /* TVShowDetailsTableViewCell.swift */,
+				42215DD126AF3F4A00316FE2 /* TVShowReviewTableViewCell.swift */,
+			);
+			path = ShowDetails;
+			sourceTree = "<group>";
+		};
 		425D40FE26A5CAE8007EFA44 /* Home */ = {
 			isa = PBXGroup;
 			children = (
@@ -133,6 +160,8 @@
 				424CED7126AD9E1C00BB7AFB /* ShowsResponse.swift */,
 				424CED7326AD9EC500BB7AFB /* ResponseMetadata.swift */,
 				424CED7526AD9F2C00BB7AFB /* Pagination.swift */,
+				42215DD326B08A3900316FE2 /* ReviewsResponse.swift */,
+				42215DD526B08A4500316FE2 /* Review.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -140,6 +169,7 @@
 		425D412626A601E2007EFA44 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				42215DCA26AE793E00316FE2 /* ShowDetails */,
 				425D40FE26A5CAE8007EFA44 /* Home */,
 				4274C44E269AE0C100D205EE /* Login */,
 			);
@@ -151,6 +181,7 @@
 			children = (
 				425D413626A7E25D007EFA44 /* AuthenticationService.swift */,
 				424CED6B26ACAF9200BB7AFB /* ShowsService.swift */,
+				42215DD926B08C0200316FE2 /* ReviewsService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -162,6 +193,7 @@
 				425D415E26A8A9FC007EFA44 /* EndPointType.swift */,
 				425D416126A8B29A007EFA44 /* AuthRoute.swift */,
 				424CED6D26AD3E1400BB7AFB /* ShowsRoute.swift */,
+				42215DD726B08B3300316FE2 /* ReviewsRoute.swift */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -254,6 +286,7 @@
 				4215773326975F3B008CCFF0 /* LaunchScreen.storyboard in Resources */,
 				4215773026975F3B008CCFF0 /* Assets.xcassets in Resources */,
 				4274C450269AE0F800D205EE /* Login.storyboard in Resources */,
+				42215DCE26AE797900316FE2 /* ShowDetails.storyboard in Resources */,
 				425D410226A5CB52007EFA44 /* Home.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -312,17 +345,24 @@
 				424CED6E26AD3E1400BB7AFB /* ShowsRoute.swift in Sources */,
 				425D412826A609C3007EFA44 /* User.swift in Sources */,
 				425D415F26A8A9FC007EFA44 /* EndPointType.swift in Sources */,
+				42215DDA26B08C0200316FE2 /* ReviewsService.swift in Sources */,
 				424CED7026AD9DF200BB7AFB /* Show.swift in Sources */,
+				42215DD226AF3F4A00316FE2 /* TVShowReviewTableViewCell.swift in Sources */,
 				4274C452269AE10E00D205EE /* LoginViewController.swift in Sources */,
 				424CED6A26ACAC9200BB7AFB /* TVShowTableViewCell.swift in Sources */,
 				425D412A26A68FD2007EFA44 /* AuthInfo.swift in Sources */,
+				42215DCC26AE796700316FE2 /* ShowDetailsController.swift in Sources */,
 				425D416226A8B29A007EFA44 /* AuthRoute.swift in Sources */,
+				42215DD826B08B3300316FE2 /* ReviewsRoute.swift in Sources */,
 				4215772726975F37008CCFF0 /* AppDelegate.swift in Sources */,
 				424CED7626AD9F2C00BB7AFB /* Pagination.swift in Sources */,
 				425D410026A5CB1C007EFA44 /* HomeViewController.swift in Sources */,
 				425D412C26A68FF9007EFA44 /* UserResponse.swift in Sources */,
 				424CED7226AD9E1C00BB7AFB /* ShowsResponse.swift in Sources */,
+				42215DD626B08A4500316FE2 /* Review.swift in Sources */,
 				424CED6C26ACAF9200BB7AFB /* ShowsService.swift in Sources */,
+				42215DD426B08A3900316FE2 /* ReviewsResponse.swift in Sources */,
+				42215DD026AF3EF600316FE2 /* TVShowDetailsTableViewCell.swift in Sources */,
 				425D413726A7E25D007EFA44 /* AuthenticationService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

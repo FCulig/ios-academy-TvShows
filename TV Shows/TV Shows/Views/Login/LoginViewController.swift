@@ -24,6 +24,7 @@ class LoginViewController : UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         initializeUI()
+        loginUser(email: "filip.culig@gmail.com", password: "123321")
     }
     
     // MARK: - Hide navigation bar
@@ -138,7 +139,7 @@ private extension LoginViewController {
         let homeViewController = storyboard.instantiateViewController(
             withIdentifier: String(describing: HomeViewController.self)
         ) as! HomeViewController
-        homeViewController.userResponse = userData
+        homeViewController.user = userData
         return homeViewController
     }
     

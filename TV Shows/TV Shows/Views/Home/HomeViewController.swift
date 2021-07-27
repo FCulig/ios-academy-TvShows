@@ -13,7 +13,7 @@ class HomeViewController : UIViewController {
     
     // MARK: Lets and vars
     
-    var userResponse: UserResponse?
+    var user: UserResponse?
     private var paginationInfo: Pagination?
     private var shows: [Show] = []
     private var page: Int = 1
@@ -69,6 +69,17 @@ extension HomeViewController: UITableViewDataSource {
         cell.configure(show: shows[indexPath.row])
         return cell
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let storyboard = UIStoryboard(name: "ShowDetails", bundle: nil)
+        let showDetailsViewController = storyboard.instantiateViewController(
+            withIdentifier: String(describing: ShowDetailsController.self)
+        ) as! ShowDetailsController
+        showDetailsViewController.user = user?.user
+        showDetailsViewController.show = shows[indexPath.row]
+        navigationController?.pushViewController(showDetailsViewController, animated: true)
+    }
+    
 }
 
 // MARK: - Implementation of infinite scrolling
