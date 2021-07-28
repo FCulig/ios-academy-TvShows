@@ -9,10 +9,15 @@ import Foundation
 import UIKit
 import SVProgressHUD
 
+protocol WriteReviewControllerDelegate: AnyObject {
+    func reviewSubmited(submissionResult: Bool)
+}
+
 class WriteReviewController: UIViewController {
     
     // MARK: - Vars and lets
     var show: Show?
+    weak var delegate: WriteReviewControllerDelegate?
     
     // MARK: - IBOutlets
     
@@ -119,6 +124,15 @@ private extension WriteReviewController {
             }
             SVProgressHUD.dismiss()
             print(response)
+            switch response.result {
+            case .success(_):
+                self.delegate?.reviewSubmited(submissionResult: true)
+            case .failure(_):
+                self.delegate?.reviewSubmited(submissionResult: false)
+            }
+            self.didSelectClose()
         }
     }
 }
+
+

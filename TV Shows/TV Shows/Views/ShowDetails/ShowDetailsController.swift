@@ -17,6 +17,9 @@ class ShowDetailsController: UIViewController {
     var show: Show?
     var reviews: [Review] = []
     private var tableData: [Any] = []
+    private let items: Int = 1
+    private let initialPage: Int = 1
+    private var currentPage: Int = 1
     
     // MARK: - IBOutlets
     
@@ -24,7 +27,7 @@ class ShowDetailsController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //getReviews()
+        getReviews(page: initialPage, items: items)
         configureUI()
         configureTableData()
     }
@@ -125,19 +128,19 @@ private extension ShowDetailsController {
             withIdentifier: String(describing: WriteReviewController.self)
         ) as! WriteReviewController
         writeReviewController.show = show
+        writeReviewController.delegate = self
         let navigationController = UINavigationController(rootViewController: writeReviewController)
         present(navigationController, animated: true)
     }
     
-    func getReviews() {
-        guard
-            let show = show
-        else {
+    func getReviews(page: Int, items: Int) {
+        print("Fetching reviews")
+        guard let show = show else {
             SVProgressHUD.showError(withStatus: "Error occured while displaying show details")
             return
         }
         SVProgressHUD.show()
-        ReviewsService.getReviews(showId: show.id, page: 1, items: 50) { [weak self] response in
+        ReviewsService.getReviews(showId: show.id, page: page, items: items) { [weak self] response in
             guard
                 let self = self,
                 let reviews = try? response.result.get().reviews
@@ -150,5 +153,17 @@ private extension ShowDetailsController {
             self.tableData += self.reviews
             self.tableView.reloadData()
         }
+    }
+}
+
+extension ShowDetailsController: WriteReviewControllerDelegate {
+    
+    func reviewSubmited(submissionResult: Bool) {
+        guard submissionResult else { return }
+        currentPage = initialPage
+        reviews = []
+        tableData = []
+        tableData.append(show)
+        getReviews(page: currentPage, items: items)
     }
 }
