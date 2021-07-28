@@ -124,6 +124,7 @@ private extension ShowDetailsController {
         let writeReviewController = storyboard.instantiateViewController(
             withIdentifier: String(describing: WriteReviewController.self)
         ) as! WriteReviewController
+        writeReviewController.show = show
         let navigationController = UINavigationController(rootViewController: writeReviewController)
         present(navigationController, animated: true)
     }

@@ -13,6 +13,7 @@ enum ReviewsRoute {
     // MARK: - Authentication routes
     
     case getReviews(showId: String,page: Int?, items: Int?)
+    case postReview(rating: Int, comment: String, showId: String)
     
 }
 
@@ -24,11 +25,18 @@ extension ReviewsRoute: EndPointType {
         switch self {
         case .getReviews(let showId, _, _):
             return "/shows/" + showId + "/reviews"
+        case .postReview(_, _, _):
+            return "/reviews"
         }
     }
     
     var method: HTTPMethod {
-        .get
+        switch self {
+        case .getReviews(_, _, _):
+            return .get
+        case .postReview(_, _, _):
+            return .post
+        }
     }
     
     var parameters: Parameters? {
@@ -37,6 +45,12 @@ extension ReviewsRoute: EndPointType {
             return [
                 "page": page ?? 1,
                 "items": items ?? 20
+            ]
+        case .postReview(let rating, let comment, let showId):
+            return [
+                "rating": rating,
+                "comment": comment,
+                "show_id": showId
             ]
         }
     }

@@ -18,4 +18,12 @@ class ReviewsService {
         )
     }
     
+    static func postReview (rating: Int, comment: String, showId: String, onSuccess: @escaping (_ response: DataResponse<ReviewResponse, AFError>) -> Void) {
+        APIManager.shared.request(
+            endpoint: ReviewsRoute.postReview(rating: rating, comment: comment, showId: showId),
+            responseDecodableType: ReviewResponse.self,
+            succsessHandler: onSuccess
+        )
+    }
+    
 }
