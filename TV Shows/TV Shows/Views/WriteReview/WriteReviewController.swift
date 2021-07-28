@@ -152,7 +152,6 @@ private extension WriteReviewController {
                 return
             }
             SVProgressHUD.dismiss()
-            print(response)
             switch response.result {
             case .success(_):
                 self.delegate?.reviewSubmited(submissionResult: true)
