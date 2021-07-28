@@ -20,6 +20,34 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="2Fc-Hg-SD6">
                                 <rect key="frame" x="0.0" y="95" width="414" height="767"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <view key="tableFooterView" contentMode="scaleToFill" id="epx-Ka-uMd" userLabel="Footer">
+                                    <rect key="frame" x="0.0" y="647.00000034679067" width="414" height="59"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <subviews>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cc3-xQ-MdX">
+                                            <rect key="frame" x="20" y="5" width="374" height="45"/>
+                                            <color key="backgroundColor" red="0.3224566579" green="0.2114402652" blue="0.54911524060000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="45" id="tFe-X0-iz4"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                            <state key="normal" title="Write a Review">
+                                                <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            </state>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                    <integer key="value" value="22"/>
+                                                </userDefinedRuntimeAttribute>
+                                            </userDefinedRuntimeAttributes>
+                                        </button>
+                                    </subviews>
+                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                    <constraints>
+                                        <constraint firstItem="cc3-xQ-MdX" firstAttribute="leading" secondItem="epx-Ka-uMd" secondAttribute="leading" constant="20" id="E3x-VG-nKm"/>
+                                        <constraint firstAttribute="trailing" secondItem="cc3-xQ-MdX" secondAttribute="trailing" constant="20" id="GqW-gt-rIE"/>
+                                        <constraint firstItem="cc3-xQ-MdX" firstAttribute="top" secondItem="epx-Ka-uMd" secondAttribute="top" constant="5" id="e8v-9A-eaZ"/>
+                                    </constraints>
+                                </view>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="TVShowDetailsTableViewCell" rowHeight="499" id="brh-EZ-2EJ" customClass="TVShowDetailsTableViewCell" customModule="TV_Shows" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="24.5" width="414" height="499"/>
