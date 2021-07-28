@@ -10,7 +10,7 @@ import Alamofire
 
 class ReviewsService {
     
-    static func getReviews (showId: Int, page: Int?, items: Int?, onSuccess: @escaping (_ response: DataResponse<ReviewsResponse, AFError>) -> Void) {
+    static func getReviews (showId: String, page: Int?, items: Int?, onSuccess: @escaping (_ response: DataResponse<ReviewsResponse, AFError>) -> Void) {
         APIManager.shared.request(
             endpoint: ReviewsRoute.getReviews(showId: showId, page: page, items: items),
             responseDecodableType: ReviewsResponse.self,

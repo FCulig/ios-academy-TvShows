@@ -12,6 +12,6 @@ struct ReviewsResponse: Codable {
     // MARK: - Vars and lets
     
     let reviews: [Review]
-    let pagination: [Pagination]
+    let meta: ResponseMetadata
     
 }

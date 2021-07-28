@@ -11,7 +11,7 @@ struct Review: Codable {
     
     // MARK: - Vars and lets
     
-    let id: Int
+    let id: String
     let comment: String
     let rating: Int
     let showId: Int

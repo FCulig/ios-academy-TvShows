@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import SVProgressHUD
 
 class ShowDetailsController: UIViewController {
     
@@ -24,6 +25,7 @@ class ShowDetailsController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        getReviews()
         configureUI()
         configureTableData()
     }
@@ -87,5 +89,18 @@ private extension ShowDetailsController {
     func configureTableData() {
         tableData.append(show as Any)
         //tableData += reviews
+    }
+    
+    func getReviews() {
+        guard
+            let show = show
+        else {
+            SVProgressHUD.showError(withStatus: "Error occured while fetching reviews for the show.")
+            return
+        }
+        ReviewsService.getReviews(showId: show.id, page: 1, items: 50) { [weak self] response in
+                guard let self = self else { return }
+                print(response)
+        }
     }
 }

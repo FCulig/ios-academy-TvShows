@@ -12,7 +12,7 @@ enum ReviewsRoute {
     
     // MARK: - Authentication routes
     
-    case getReviews(showId: Int,page: Int?, items: Int?)
+    case getReviews(showId: String,page: Int?, items: Int?)
     
 }
 
@@ -23,7 +23,7 @@ extension ReviewsRoute: EndPointType {
     var path: String {
         switch self {
         case .getReviews(let showId, _, _):
-            return "/shows/" + String(showId) + "/reviews"
+            return "/shows/" + showId + "/reviews"
         }
     }
     
