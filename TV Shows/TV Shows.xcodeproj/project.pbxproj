@@ -19,6 +19,8 @@
 		42215DD826B08B3300316FE2 /* ReviewsRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42215DD726B08B3300316FE2 /* ReviewsRoute.swift */; };
 		42215DDA26B08C0200316FE2 /* ReviewsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42215DD926B08C0200316FE2 /* ReviewsService.swift */; };
 		42215DDC26B1D61D00316FE2 /* RatingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42215DDB26B1D61C00316FE2 /* RatingView.swift */; };
+		42215DE126B1E17100316FE2 /* WriteReview.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 42215DE026B1E17100316FE2 /* WriteReview.storyboard */; };
+		42215DE326B1E18200316FE2 /* WriteReviewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42215DE226B1E18200316FE2 /* WriteReviewController.swift */; };
 		424CED6A26ACAC9200BB7AFB /* TVShowTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 424CED6926ACAC9200BB7AFB /* TVShowTableViewCell.swift */; };
 		424CED6C26ACAF9200BB7AFB /* ShowsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 424CED6B26ACAF9200BB7AFB /* ShowsService.swift */; };
 		424CED6E26AD3E1400BB7AFB /* ShowsRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 424CED6D26AD3E1400BB7AFB /* ShowsRoute.swift */; };
@@ -56,6 +58,8 @@
 		42215DD726B08B3300316FE2 /* ReviewsRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewsRoute.swift; sourceTree = "<group>"; };
 		42215DD926B08C0200316FE2 /* ReviewsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewsService.swift; sourceTree = "<group>"; };
 		42215DDB26B1D61C00316FE2 /* RatingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingView.swift; sourceTree = "<group>"; };
+		42215DE026B1E17100316FE2 /* WriteReview.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = WriteReview.storyboard; sourceTree = "<group>"; };
+		42215DE226B1E18200316FE2 /* WriteReviewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteReviewController.swift; sourceTree = "<group>"; };
 		424CED6926ACAC9200BB7AFB /* TVShowTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVShowTableViewCell.swift; sourceTree = "<group>"; };
 		424CED6B26ACAF9200BB7AFB /* ShowsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowsService.swift; sourceTree = "<group>"; };
 		424CED6D26AD3E1400BB7AFB /* ShowsRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowsRoute.swift; sourceTree = "<group>"; };
@@ -143,6 +147,15 @@
 			path = ShowDetails;
 			sourceTree = "<group>";
 		};
+		42215DDF26B1E15C00316FE2 /* WriteReview */ = {
+			isa = PBXGroup;
+			children = (
+				42215DE026B1E17100316FE2 /* WriteReview.storyboard */,
+				42215DE226B1E18200316FE2 /* WriteReviewController.swift */,
+			);
+			path = WriteReview;
+			sourceTree = "<group>";
+		};
 		425D40FE26A5CAE8007EFA44 /* Home */ = {
 			isa = PBXGroup;
 			children = (
@@ -172,6 +185,7 @@
 		425D412626A601E2007EFA44 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				42215DDF26B1E15C00316FE2 /* WriteReview */,
 				42215DCA26AE793E00316FE2 /* ShowDetails */,
 				425D40FE26A5CAE8007EFA44 /* Home */,
 				4274C44E269AE0C100D205EE /* Login */,
@@ -286,6 +300,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				42215DE126B1E17100316FE2 /* WriteReview.storyboard in Resources */,
 				4215773326975F3B008CCFF0 /* LaunchScreen.storyboard in Resources */,
 				4215773026975F3B008CCFF0 /* Assets.xcassets in Resources */,
 				4274C450269AE0F800D205EE /* Login.storyboard in Resources */,
@@ -358,6 +373,7 @@
 				42215DCC26AE796700316FE2 /* ShowDetailsController.swift in Sources */,
 				425D416226A8B29A007EFA44 /* AuthRoute.swift in Sources */,
 				42215DD826B08B3300316FE2 /* ReviewsRoute.swift in Sources */,
+				42215DE326B1E18200316FE2 /* WriteReviewController.swift in Sources */,
 				4215772726975F37008CCFF0 /* AppDelegate.swift in Sources */,
 				424CED7626AD9F2C00BB7AFB /* Pagination.swift in Sources */,
 				425D410026A5CB1C007EFA44 /* HomeViewController.swift in Sources */,

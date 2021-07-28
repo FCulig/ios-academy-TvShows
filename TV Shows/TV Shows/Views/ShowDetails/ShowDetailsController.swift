@@ -24,7 +24,7 @@ class ShowDetailsController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        getReviews()
+        //getReviews()
         configureUI()
         configureTableData()
     }
@@ -33,6 +33,15 @@ class ShowDetailsController: UIViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         navigationController?.navigationBar.prefersLargeTitles = false
+    }
+}
+
+// MARK: - IBActions
+
+private extension ShowDetailsController {
+  
+    @IBAction func writeReviewButtonPressed() {
+        presentWriteReviewScreen()
     }
     
 }
@@ -91,6 +100,7 @@ extension ShowDetailsController: UITableViewDataSource {
         return UITableViewCell()
     }
 }
+
 // MARK: - Utilities
 
 private extension ShowDetailsController {
@@ -107,6 +117,15 @@ private extension ShowDetailsController {
     
     func configureTableData() {
         tableData.append(show as Any)
+    }
+    
+    func presentWriteReviewScreen() {
+        let storyboard = UIStoryboard(name: "WriteReview", bundle: nil)
+        let writeReviewController = storyboard.instantiateViewController(
+            withIdentifier: String(describing: WriteReviewController.self)
+        ) as! WriteReviewController
+        let navigationController = UINavigationController(rootViewController: writeReviewController)
+        present(navigationController, animated: true)
     }
     
     func getReviews() {
