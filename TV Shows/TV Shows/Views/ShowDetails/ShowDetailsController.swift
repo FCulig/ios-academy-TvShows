@@ -12,9 +12,7 @@ import SVProgressHUD
 class ShowDetailsController: UIViewController {
     
     // MARK: - Vars and lets
-    /*var userStrong: User = {
-        return User(email: "", imageUrl: "", id: "")
-    }*/
+    
     var user: User?
     var show: Show?
     var reviews: [Review] = []

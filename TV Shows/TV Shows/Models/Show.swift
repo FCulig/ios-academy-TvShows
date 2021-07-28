@@ -16,7 +16,7 @@ struct Show: Codable {
     let description: String?
     let imageUrl: String?
     let numberOfReviews: Int
-    let averageRating: Decimal?
+    let averageRating: Double
     
     // MARK: - Coding key
 
@@ -26,6 +26,6 @@ struct Show: Codable {
         case description
         case imageUrl = "image_url"
         case numberOfReviews = "no_of_reviews"
-        case averageRating = "average_ratin"
+        case averageRating = "average_rating"
     }
 }
