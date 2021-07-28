@@ -16,10 +16,12 @@ class ShowDetailsController: UIViewController {
     var user: User?
     var show: Show?
     var reviews: [Review] = []
+    var reviewPagination: Pagination?
     private var tableData: [Any] = []
     private let items: Int = 1
     private let initialPage: Int = 1
     private var currentPage: Int = 1
+    private var isFetchingReviews: Bool = false
     
     // MARK: - IBOutlets
     
@@ -104,6 +106,26 @@ extension ShowDetailsController: UITableViewDataSource {
     }
 }
 
+// MARK: - Implementation of infinite scrolling
+
+extension ShowDetailsController: UIScrollViewDelegate {
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if shouldFetchReviews(scrollView: scrollView) {
+            currentPage += 1
+            getReviews(page: currentPage, items: items)
+        }
+    }
+    
+    private func shouldFetchReviews(scrollView: UIScrollView) -> Bool {
+        let position = scrollView.contentOffset.y
+        let currentHeight = tableView.contentSize.height - 100 - scrollView.frame.height
+        guard let totalPages = reviewPagination?.pages else { return false }
+        return position > currentHeight && !isFetchingReviews && totalPages > currentPage
+    }
+    
+}
+
 // MARK: - Utilities
 
 private extension ShowDetailsController {
@@ -140,17 +162,21 @@ private extension ShowDetailsController {
             return
         }
         SVProgressHUD.show()
+        isFetchingReviews = true
         ReviewsService.getReviews(showId: show.id, page: page, items: items) { [weak self] response in
             guard
                 let self = self,
-                let reviews = try? response.result.get().reviews
+                let reviews = try? response.result.get().reviews,
+                let pagination = try? response.result.get().meta.pagination
             else {
                 SVProgressHUD.showError(withStatus: "Error while fetching reviews")
                 return
             }
             SVProgressHUD.dismiss()
+            self.isFetchingReviews = false
             self.reviews += reviews
             self.tableData += self.reviews
+            self.reviewPagination = pagination
             self.tableView.reloadData()
         }
     }
