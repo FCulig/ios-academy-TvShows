@@ -17,6 +17,7 @@ class ShowDetailsController: UIViewController {
     }*/
     var user: User?
     var show: Show?
+    var reviews: [Review] = []
     private var tableData: [Any] = []
     
     // MARK: - IBOutlets
@@ -63,13 +64,33 @@ extension ShowDetailsController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(
-            withIdentifier: String(describing: TVShowDetailsTableViewCell.self),
-            for: indexPath
-        ) as! TVShowDetailsTableViewCell
-        //print(show)
-        cell.configure(show: show)
-        return cell
+        let cellData = tableData[indexPath.row]
+        
+        if type(of: cellData) == Optional<Show>.self {
+            guard let show = cellData as? Show else {
+                return UITableViewCell()
+            }
+            let cell = tableView.dequeueReusableCell(
+                withIdentifier: String(describing: TVShowDetailsTableViewCell.self),
+                for: indexPath
+            ) as! TVShowDetailsTableViewCell
+            cell.configure(show: show)
+            return cell
+        }
+        
+        if type(of: cellData) == Review.self {
+            guard let review = cellData as? Review else {
+                return UITableViewCell()
+            }
+            let cell = tableView.dequeueReusableCell(
+                withIdentifier: String(describing: TVShowReviewTableViewCell.self),
+                for: indexPath
+            ) as! TVShowReviewTableViewCell
+            cell.configure(review: review)
+            return cell
+        }
+        
+        return UITableViewCell()
     }
 }
 // MARK: - Utilities
@@ -88,19 +109,28 @@ private extension ShowDetailsController {
     
     func configureTableData() {
         tableData.append(show as Any)
-        //tableData += reviews
     }
     
     func getReviews() {
         guard
             let show = show
         else {
-            SVProgressHUD.showError(withStatus: "Error occured while fetching reviews for the show.")
+            SVProgressHUD.showError(withStatus: "Error occured while displaying show details")
             return
         }
+        SVProgressHUD.show()
         ReviewsService.getReviews(showId: show.id, page: 1, items: 50) { [weak self] response in
-                guard let self = self else { return }
-                print(response)
+            guard
+                let self = self,
+                let reviews = try? response.result.get().reviews
+            else {
+                SVProgressHUD.showError(withStatus: "Error while fetching reviews")
+                return
+            }
+            SVProgressHUD.dismiss()
+            self.reviews += reviews
+            self.tableData += self.reviews
+            self.tableView.reloadData()
         }
     }
 }

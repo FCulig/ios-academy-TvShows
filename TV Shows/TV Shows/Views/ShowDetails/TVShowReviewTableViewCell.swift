@@ -25,9 +25,9 @@ class TVShowReviewTableViewCell: UITableViewCell {
         reviewLabel.text = ""
     }
     
-    func configure(review: Review?){
-        reviewersEmailLabel.text = review?.user.email
-        reviewLabel.text = review?.comment
+    func configure(review: Review){
+        reviewersEmailLabel.text = review.user.email
+        reviewLabel.text = review.comment
     }
     
 }

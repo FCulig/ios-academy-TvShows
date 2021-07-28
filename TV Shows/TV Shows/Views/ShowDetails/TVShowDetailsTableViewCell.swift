@@ -23,8 +23,8 @@ class TVShowDetailsTableViewCell: UITableViewCell {
         tvShowDescriptionLabel.text = ""
     }
     
-    func configure(show: Show?){
-        tvShowDescriptionLabel.text = show?.description
+    func configure(show: Show){
+        tvShowDescriptionLabel.text = show.description
     }
     
 }
