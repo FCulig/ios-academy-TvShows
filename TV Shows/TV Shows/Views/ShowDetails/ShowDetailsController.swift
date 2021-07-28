@@ -18,7 +18,7 @@ class ShowDetailsController: UIViewController {
     var reviews: [Review] = []
     var reviewPagination: Pagination?
     private var tableData: [Any] = []
-    private let items: Int = 1
+    private let items: Int = 20
     private let initialPage: Int = 1
     private var currentPage: Int = 1
     private var isFetchingReviews: Bool = false
@@ -156,7 +156,6 @@ private extension ShowDetailsController {
     }
     
     func getReviews(page: Int, items: Int) {
-        print("Fetching reviews")
         guard let show = show else {
             SVProgressHUD.showError(withStatus: "Error occured while displaying show details")
             return
