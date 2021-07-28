@@ -18,6 +18,8 @@ class WriteReviewController: UIViewController {
     // MARK: - Vars and lets
     var show: Show?
     weak var delegate: WriteReviewControllerDelegate?
+    private var reviewTextViewPlaceholder: String = "Enter your comment here..."
+    private var isTextViewPlaceholderShown: Bool = true
     
     // MARK: - IBOutlets
     
@@ -27,7 +29,6 @@ class WriteReviewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        configureNavigationBar()
         configureUI()
         configureTextViewDelegate()
     }
@@ -61,17 +62,39 @@ extension WriteReviewController: UITextViewDelegate {
     }
     
     func textViewDidChange(_ textView: UITextView) {
-        if shouldEnableSubmitButton() {
-            enableSubmitButton()
-        } else {
+        if isReviewTextViewEmpty() && isTextViewPlaceholderShown == false {
             disableSubmitButton()
+        } else {
+            enableSubmitButton()
         }
     }
+    
+    func textViewDidBeginEditing(_ textView: UITextView)
+    {
+        if isTextViewPlaceholderShown {
+            hideTextViewPlaceholder()
+        }
+    }
+
+    func textViewDidEndEditing(_ textView: UITextView)
+    {
+        if isTextViewPlaceholderShown == false {
+            showTextViewPlaceholder()
+        }
+    }
+    
 }
 
 // MARK: - Utilities
 
 private extension WriteReviewController {
+    
+    func configureUI() {
+        ratingView.isEnabled = true
+        configureNavigationBar()
+        disableSubmitButton()
+        showTextViewPlaceholder()
+    }
     
     func configureNavigationBar() {
         navigationItem.leftBarButtonItem = UIBarButtonItem(
@@ -81,11 +104,6 @@ private extension WriteReviewController {
             action: #selector(didSelectClose)
           )
         navigationItem.title = "Write a Review"
-    }
-    
-    func configureUI() {
-        ratingView.isEnabled = true
-        disableSubmitButton()
     }
     
     func disableSubmitButton() {
@@ -98,15 +116,26 @@ private extension WriteReviewController {
         submitReviewButton.alpha = 1
     }
     
-    func shouldEnableSubmitButton() -> Bool {
+    func showTextViewPlaceholder() {
+        reviewTextView.text = reviewTextViewPlaceholder
+        reviewTextView.textColor = .lightGray
+        isTextViewPlaceholderShown = true
+    }
+    
+    func hideTextViewPlaceholder() {
+        reviewTextView.text = ""
+        reviewTextView.textColor = .black
+        isTextViewPlaceholderShown = false
+    }
+    
+    func isReviewTextViewEmpty() -> Bool {
         guard
             let reviewText = reviewTextView.text
         else {
             return false
         }
         let reviewIsEmpty = reviewText.trimmingCharacters(in: .whitespaces).isEmpty
-        let shouldEnable = !reviewIsEmpty
-        return shouldEnable
+        return reviewIsEmpty
     }
     
     func submitReview(rating: Int, review: String) {
