@@ -25,16 +25,16 @@ extension ReviewsRoute: EndPointType {
         switch self {
         case .getReviews(let showId, _, _):
             return "/shows/" + showId + "/reviews"
-        case .postReview(_, _, _):
+        case .postReview:
             return "/reviews"
         }
     }
     
     var method: HTTPMethod {
         switch self {
-        case .getReviews(_, _, _):
+        case .getReviews:
             return .get
-        case .postReview(_, _, _):
+        case .postReview:
             return .post
         }
     }
