@@ -13,7 +13,6 @@ class ShowDetailsController: UIViewController {
     
     // MARK: - Vars and lets
     
-    var user: User?
     var show: Show?
     var reviews: [Review] = []
     var reviewPagination: Pagination?
@@ -25,7 +24,7 @@ class ShowDetailsController: UIViewController {
     
     // MARK: - IBOutlets
     
-    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet private weak var tableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,6 +36,7 @@ class ShowDetailsController: UIViewController {
     // MARK: - Reseting size of navigation bar
     
     override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
         navigationController?.navigationBar.prefersLargeTitles = false
     }
 }
@@ -187,8 +187,7 @@ extension ShowDetailsController: WriteReviewControllerDelegate {
         guard submissionResult else { return }
         currentPage = initialPage
         reviews = []
-        tableData = []
-        tableData.append(show)
+        tableData = [show]
         getReviews(page: currentPage, items: items)
     }
 }

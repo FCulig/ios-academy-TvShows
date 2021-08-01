@@ -16,7 +16,6 @@ class HomeViewController : UIViewController {
     var user: UserResponse?
     private var paginationInfo: Pagination?
     private var shows: [Show] = []
-    private var page: Int = 1
     private let items: Int = 20
     private var isFetchingShows: Bool = false
     
@@ -27,7 +26,7 @@ class HomeViewController : UIViewController {
     override func viewDidLoad(){
         super.viewDidLoad()
         configureTableView()
-        getTVShows(page: page, items: items)
+        getTVShows(page: 1, items: items)
     }
     
     // MARK: - Show navigation bar
@@ -47,15 +46,20 @@ extension HomeViewController: UITableViewDelegate {
         tableView.delegate = self
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let storyboard = UIStoryboard(name: "ShowDetails", bundle: nil)
+        let showDetailsViewController = storyboard.instantiateViewController(
+            withIdentifier: String(describing: ShowDetailsController.self)
+        ) as! ShowDetailsController
+        showDetailsViewController.show = shows[indexPath.row]
+        navigationController?.pushViewController(showDetailsViewController, animated: true)
+    }
+    
 }
 
 // MARK: - UITableViewDataSource
 
 extension HomeViewController: UITableViewDataSource {
-    
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
-    }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return shows.count
@@ -70,16 +74,6 @@ extension HomeViewController: UITableViewDataSource {
         return cell
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let storyboard = UIStoryboard(name: "ShowDetails", bundle: nil)
-        let showDetailsViewController = storyboard.instantiateViewController(
-            withIdentifier: String(describing: ShowDetailsController.self)
-        ) as! ShowDetailsController
-        showDetailsViewController.user = user?.user
-        showDetailsViewController.show = shows[indexPath.row]
-        navigationController?.pushViewController(showDetailsViewController, animated: true)
-    }
-    
 }
 
 // MARK: - Implementation of infinite scrolling
@@ -88,8 +82,7 @@ extension HomeViewController: UIScrollViewDelegate {
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         if shouldFetchShows(scrollView: scrollView) {
-            page += 1
-            getTVShows(page: page, items: items)
+            getTVShows(page: getCurrentPage() + 1, items: items)
         }
     }
     
@@ -97,7 +90,7 @@ extension HomeViewController: UIScrollViewDelegate {
         let position = scrollView.contentOffset.y
         let currentHeight = tableView.contentSize.height - 100 - scrollView.frame.height
         guard let totalPages = paginationInfo?.pages else { return false }
-        return position > currentHeight && !isFetchingShows && totalPages > page
+        return position > currentHeight && !isFetchingShows && totalPages > getCurrentPage()
     }
     
 }
@@ -127,4 +120,8 @@ private extension HomeViewController {
         }
     }
     
+    private func getCurrentPage() -> Int {
+        guard let currentPage = paginationInfo?.page else { return 0 }
+        return currentPage
+    }
 }

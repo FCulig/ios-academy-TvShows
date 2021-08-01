@@ -18,7 +18,7 @@ class WriteReviewController: UIViewController {
     // MARK: - Vars and lets
     var show: Show?
     weak var delegate: WriteReviewControllerDelegate?
-    private var reviewTextViewPlaceholder: String = "Enter your comment here..."
+    private var showRating: Int = 0
     private var isTextViewPlaceholderShown: Bool = true
     
     // MARK: - IBOutlets
@@ -29,6 +29,7 @@ class WriteReviewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        ratingView.delegate = self
         configureUI()
         configureTextViewDelegate()
     }
@@ -46,7 +47,8 @@ private extension WriteReviewController {
     @IBAction func submitReviewButtonPressed() {
         guard
             let reviewText = reviewTextView.text,
-            !reviewText.trimmingCharacters(in: .whitespaces).isEmpty
+            !reviewText.trimmingCharacters(in: .whitespaces).isEmpty,
+            showRating > 0
         else {
             return
         }
@@ -62,11 +64,7 @@ extension WriteReviewController: UITextViewDelegate {
     }
     
     func textViewDidChange(_ textView: UITextView) {
-        if isReviewTextViewEmpty() && isTextViewPlaceholderShown == false {
-            disableSubmitButton()
-        } else {
-            enableSubmitButton()
-        }
+        validateRatingForm()
     }
     
     func textViewDidBeginEditing(_ textView: UITextView)
@@ -81,6 +79,17 @@ extension WriteReviewController: UITextViewDelegate {
         if isTextViewPlaceholderShown == false {
             showTextViewPlaceholder()
         }
+    }
+    
+}
+
+// MARK: - RatingViewDelegate
+
+extension WriteReviewController: RatingViewDelegate {
+    
+    func didChangeRating(_ rating: Int) {
+        showRating = rating
+        validateRatingForm()
     }
     
 }
@@ -106,6 +115,20 @@ private extension WriteReviewController {
         navigationItem.title = "Write a Review"
     }
     
+    func shouldEnableSubmitButton() -> Bool {
+        let isTextValid = !isReviewTextViewEmpty() && isTextViewPlaceholderShown == false
+        let isRatingValid = showRating > 0
+        return isTextValid && isRatingValid
+    }
+    
+    func validateRatingForm() {
+        if shouldEnableSubmitButton() {
+            enableSubmitButton()
+        } else {
+            disableSubmitButton()
+        }
+    }
+    
     func disableSubmitButton() {
         submitReviewButton.isEnabled = false
         submitReviewButton.alpha = 0.6
@@ -117,7 +140,7 @@ private extension WriteReviewController {
     }
     
     func showTextViewPlaceholder() {
-        reviewTextView.text = reviewTextViewPlaceholder
+        reviewTextView.text = "Enter your comment here..."
         reviewTextView.textColor = .lightGray
         isTextViewPlaceholderShown = true
     }
