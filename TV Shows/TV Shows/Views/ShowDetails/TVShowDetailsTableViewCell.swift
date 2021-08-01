@@ -16,10 +16,6 @@ class TVShowDetailsTableViewCell: UITableViewCell {
     @IBOutlet private var ratingView: RatingView!
     @IBOutlet private weak var totalAndAverageReviewLabel: UILabel!
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
-    }
-    
     override func prepareForReuse() {
         super.prepareForReuse()
         tvShowDescriptionLabel.text = ""
@@ -27,7 +23,7 @@ class TVShowDetailsTableViewCell: UITableViewCell {
         ratingView.isEnabled = false
     }
     
-    func configure(show: Show){
+    func configure(show: Show) {
         tvShowDescriptionLabel.text = show.description
         totalAndAverageReviewLabel.text = String(show.numberOfReviews) + " REVIEWS, " + String(show.averageRating) + " AVERAGE"
         ratingView.setRoundedRating(show.averageRating)
