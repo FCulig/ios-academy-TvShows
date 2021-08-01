@@ -25,24 +25,18 @@ protocol EndPointType : URLRequestConvertible{
 extension EndPointType {
     
     var baseURL: String {
-        get {
-            "https://tv-shows.infinum.academy/"
-        }
+        "https://tv-shows.infinum.academy/"
     }
     
     var url: URL {
-        get {
-            URL(string: self.baseURL + self.path)!
-        }
+        URL(string: self.baseURL + self.path)!
     }
     
     var headers: HTTPHeaders {
-        get {
-            if let headers = APIManager.shared.authInfo?.headers {
-                return HTTPHeaders(headers)
-            } else {
-                return HTTPHeaders()
-            }
+        if let headers = APIManager.shared.authInfo?.headers {
+            return HTTPHeaders(headers)
+        } else {
+            return HTTPHeaders()
         }
     }
     
