@@ -26,7 +26,7 @@ class LoginViewController : UIViewController {
         super.viewDidLoad()
         initializeUI()
         animateUI()
-        // loginUser(email: "filip.culig@gmail.com", password: "123321")
+        loginUser(email: "filip.culig@gmail.com", password: "123321")
     }
     
     // MARK: - Hide navigation bar

@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import Kingfisher
 
 class TVShowDetailsTableViewCell: UITableViewCell {
     
@@ -15,6 +16,7 @@ class TVShowDetailsTableViewCell: UITableViewCell {
     @IBOutlet private weak var tvShowDescriptionLabel: UILabel!
     @IBOutlet private var ratingView: RatingView!
     @IBOutlet private weak var totalAndAverageReviewLabel: UILabel!
+    @IBOutlet private weak var showImage: UIImageView!
     
     override func prepareForReuse() {
         super.prepareForReuse()
@@ -27,6 +29,14 @@ class TVShowDetailsTableViewCell: UITableViewCell {
         tvShowDescriptionLabel.text = show.description
         totalAndAverageReviewLabel.text = String(show.numberOfReviews) + " REVIEWS, " + String(show.averageRating) + " AVERAGE"
         ratingView.setRoundedRating(show.averageRating)
+        guard let imageUrl = show.imageUrl else {
+            showImage.image = UIImage(named: "ic-show-placeholder-horizontal")
+            return
+        }
+        showImage.kf.setImage(
+            with: URL(string: imageUrl),
+            placeholder: UIImage(named: "ic-show-placeholder-horizontal")
+        )
     }
     
 }
