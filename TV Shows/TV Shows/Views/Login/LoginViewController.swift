@@ -20,11 +20,13 @@ class LoginViewController : UIViewController {
     @IBOutlet private weak var rememberMeButton: UIButton!
     @IBOutlet private weak var loginButton: UIButton!
     @IBOutlet private weak var registerButton: UIButton!
+    @IBOutlet private weak var formStackView: UIStackView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         initializeUI()
-        loginUser(email: "filip.culig@gmail.com", password: "123321")
+        animateUI()
+        // loginUser(email: "filip.culig@gmail.com", password: "123321")
     }
     
     // MARK: - Hide navigation bar
@@ -216,4 +218,16 @@ private extension LoginViewController {
         registerButton.isEnabled = false
     }
     
+    func animateUI() {
+        formStackView.transform = CGAffineTransform(translationX: 0, y: 200)
+        formStackView.alpha = 0
+        UIView.animateKeyframes(
+            withDuration: 2,
+            delay: 0,
+            options: [],
+            animations: {
+                self.formStackView.transform = CGAffineTransform(translationX: 0, y: 0)
+                self.formStackView.alpha = 1
+            })
+    }
 }

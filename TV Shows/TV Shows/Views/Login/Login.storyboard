@@ -232,6 +232,7 @@
                     <navigationItem key="navigationItem" id="mlF-RB-Ak8"/>
                     <connections>
                         <outlet property="emailTextField" destination="RJM-yT-ohI" id="dNf-Th-gCM"/>
+                        <outlet property="formStackView" destination="7po-aS-nC0" id="S5a-i7-vp3"/>
                         <outlet property="loginButton" destination="55r-8c-8jE" id="vcp-Bg-vYr"/>
                         <outlet property="passwordTextField" destination="DA9-ia-JC7" id="708-TC-0W8"/>
                         <outlet property="registerButton" destination="nmQ-Jm-lMA" id="714-ha-C3T"/>
