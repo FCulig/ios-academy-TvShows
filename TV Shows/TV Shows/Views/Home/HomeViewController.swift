@@ -13,7 +13,6 @@ class HomeViewController : UIViewController {
     
     // MARK: Lets and vars
     
-    var user: UserResponse?
     private var paginationInfo: Pagination?
     private var shows: [Show] = []
     private let items: Int = 20
@@ -44,6 +43,15 @@ extension HomeViewController: UITableViewDelegate {
     private func configureTableView() {
         tableView.dataSource = self
         tableView.delegate = self
+        configureRefreshControl()
+    }
+    
+    private func configureRefreshControl() {
+        let refreshControl = UIRefreshControl()
+        refreshControl.backgroundColor = .white
+        refreshControl.tintColor = .gray
+        refreshControl.addTarget(self, action: #selector(refresh), for: UIControl.Event.valueChanged)
+        self.tableView.addSubview(refreshControl)
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -123,5 +131,10 @@ private extension HomeViewController {
     private func getCurrentPage() -> Int {
         guard let currentPage = paginationInfo?.page else { return 0 }
         return currentPage
+    }
+    
+    @objc private func refresh() {
+        shows = []
+        getTVShows(page: 1, items: items)
     }
 }
