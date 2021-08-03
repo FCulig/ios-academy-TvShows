@@ -18,8 +18,6 @@ class ShowDetailsController: UIViewController {
     var reviewPagination: Pagination?
     private var tableData: [Any] = []
     private let items: Int = 20
-    private let initialPage: Int = 1
-    private var currentPage: Int = 1
     private var isFetchingReviews: Bool = false
     
     // MARK: - IBOutlets
@@ -28,7 +26,7 @@ class ShowDetailsController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //getReviews(page: initialPage, items: items)
+        getReviews(page: 1, items: items)
         configureUI()
     }
     
@@ -59,7 +57,7 @@ extension ShowDetailsController: UITableViewDelegate {
         tableView.delegate = self
         tableView.allowsSelection = false
         tableView.separatorColor = .white
-        tableData = [show, "No reviews yet"]
+        tableData = [show, "No reviews yet."]
     }
     
 }
@@ -117,8 +115,8 @@ extension ShowDetailsController: UIScrollViewDelegate {
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         if shouldFetchReviews(scrollView: scrollView) {
-            currentPage += 1
-            getReviews(page: currentPage, items: items)
+            guard let currentPage = reviewPagination?.page else { return }
+            getReviews(page: currentPage + 1, items: items)
         }
     }
     
@@ -126,6 +124,7 @@ extension ShowDetailsController: UIScrollViewDelegate {
         let position = scrollView.contentOffset.y
         let currentHeight = tableView.contentSize.height - 100 - scrollView.frame.height
         guard let totalPages = reviewPagination?.pages else { return false }
+        guard let currentPage = reviewPagination?.page else { return  false}
         return position > currentHeight && !isFetchingReviews && totalPages > currentPage
     }
     
@@ -181,7 +180,8 @@ private extension ShowDetailsController {
             SVProgressHUD.dismiss()
             self.isFetchingReviews = false
             self.reviews += reviews
-            self.tableData = [self.show, self.reviews]
+            self.tableData = [self.show]
+            self.tableData += self.reviews
             self.reviewPagination = pagination
             self.tableView.reloadData()
         }
@@ -192,9 +192,9 @@ extension ShowDetailsController: WriteReviewControllerDelegate {
     
     func reviewSubmited(submissionResult: Bool) {
         guard submissionResult else { return }
-        currentPage = initialPage
         reviews = []
         tableData = [show]
+        guard let currentPage = reviewPagination?.page else { return }
         getReviews(page: currentPage, items: items)
     }
 }
