@@ -27,12 +27,13 @@ class TVShowReviewTableViewCell: UITableViewCell {
         reviewersEmailLabel.text = review.user.email
         reviewLabel.text = review.comment
         guard let imageUrl = review.user.imageUrl else {
-            profileImage.image = UIImage(named: "ic-profile-placeholder")
+            profileImage.image = UIImage(named: "ic-show-placeholder-vertical")
             return
         }
-        profileImage.kf.setImage(
-            with: URL(string: imageUrl),
-            placeholder: UIImage(named: "ic-profile-placeholder")
+        ImageManager.shared.getImage(
+            imageView: profileImage,
+            imageUrl: URL(string: imageUrl),
+            placeholderImage: UIImage(named: "ic-show-placeholder-vertical")
         )
     }
     

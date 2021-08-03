@@ -29,9 +29,10 @@ class TVShowTableViewCell: UITableViewCell {
             showImage.image = UIImage(named: "ic-show-placeholder-vertical")
             return
         }
-        showImage.kf.setImage(
-            with: URL(string: imageUrl),
-            placeholder: UIImage(named: "ic-show-placeholder-vertical")
+        ImageManager.shared.getImage(
+            imageView: showImage,
+            imageUrl: URL(string: imageUrl),
+            placeholderImage: UIImage(named: "ic-show-placeholder-vertical")
         )
     }
     

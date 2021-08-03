@@ -30,12 +30,13 @@ class TVShowDetailsTableViewCell: UITableViewCell {
         totalAndAverageReviewLabel.text = String(show.numberOfReviews) + " REVIEWS, " + String(show.averageRating) + " AVERAGE"
         ratingView.setRoundedRating(show.averageRating)
         guard let imageUrl = show.imageUrl else {
-            showImage.image = UIImage(named: "ic-show-placeholder-horizontal")
+            showImage.image = UIImage(named: "ic-show-placeholder-vertical")
             return
         }
-        showImage.kf.setImage(
-            with: URL(string: imageUrl),
-            placeholder: UIImage(named: "ic-show-placeholder-horizontal")
+        ImageManager.shared.getImage(
+            imageView: showImage,
+            imageUrl: URL(string: imageUrl),
+            placeholderImage: UIImage(named: "ic-show-placeholder-vertical")
         )
     }
     
