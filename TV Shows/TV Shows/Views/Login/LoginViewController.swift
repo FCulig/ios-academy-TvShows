@@ -27,7 +27,6 @@ class LoginViewController : UIViewController {
         super.viewDidLoad()
         initializeUI()
         animateUI()
-        // loginUser(email: "filip.culig@gmail.com", password: "123321")
     }
     
     // MARK: - Hide navigation bar
@@ -166,9 +165,8 @@ private extension LoginViewController {
     // MARK: - KeychainAccess
     
     func storeAuthInfoToDevice(authInfo: AuthInfo) {
-        let keychain = Keychain(service: "http://tv-shows.infinum.academy/")
         guard let encodedAuthInfo = try? JSONEncoder().encode(authInfo) else { return }
-        keychain[data: "authInfo"] = encodedAuthInfo
+        KeychainManager.shared.storeObject(key: "authInfo", value: encodedAuthInfo)
     }
     
     // MARK: - UI initialization
