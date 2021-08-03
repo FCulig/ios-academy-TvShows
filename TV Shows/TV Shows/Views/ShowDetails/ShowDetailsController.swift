@@ -28,9 +28,8 @@ class ShowDetailsController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        getReviews(page: initialPage, items: items)
+        //getReviews(page: initialPage, items: items)
         configureUI()
-        configureTableData()
     }
     
     // MARK: - Reseting size of navigation bar
@@ -59,6 +58,8 @@ extension ShowDetailsController: UITableViewDelegate {
         tableView.dataSource = self
         tableView.delegate = self
         tableView.allowsSelection = false
+        tableView.separatorColor = .white
+        tableData = [show, "No reviews yet"]
     }
     
 }
@@ -66,10 +67,6 @@ extension ShowDetailsController: UITableViewDelegate {
 // MARK: - UITableViewDataSource
 
 extension ShowDetailsController: UITableViewDataSource {
-    
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
-    }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return tableData.count
@@ -99,6 +96,14 @@ extension ShowDetailsController: UITableViewDataSource {
                 for: indexPath
             ) as! TVShowReviewTableViewCell
             cell.configure(review: review)
+            return cell
+        }
+        
+        if type(of: cellData) == String.self {
+            let cell = tableView.dequeueReusableCell(
+                withIdentifier: "NoReviewsTableViewCell",
+                for: indexPath
+            )
             return cell
         }
         
@@ -140,10 +145,6 @@ private extension ShowDetailsController {
         navigationItem.title = title
     }
     
-    func configureTableData() {
-        tableData.append(show as Any)
-    }
-    
     func presentWriteReviewScreen() {
         let storyboard = UIStoryboard(name: "WriteReview", bundle: nil)
         let writeReviewController = storyboard.instantiateViewController(
@@ -171,10 +172,16 @@ private extension ShowDetailsController {
                 SVProgressHUD.showError(withStatus: "Error while fetching reviews")
                 return
             }
+            
+            if reviews.count > 0 {
+                self.tableData = [show]
+                self.tableView.separatorColor = .lightGray
+            }
+            
             SVProgressHUD.dismiss()
             self.isFetchingReviews = false
             self.reviews += reviews
-            self.tableData += self.reviews
+            self.tableData = [self.show, self.reviews]
             self.reviewPagination = pagination
             self.tableView.reloadData()
         }
