@@ -100,12 +100,13 @@ private extension ProfileViewController {
         UserService.getCurrentUser { [weak self] response in
             guard
                 let self = self,
-                let user = try? response.result.get().user
+                let userResponse = try? response.result.get().user
             else {
                 SVProgressHUD.showError(withStatus: "Error while fetching user information")
                 return
             }
-            self.configureUI(user: user)
+            self.user = userResponse
+            self.configureUI(user: userResponse)
             SVProgressHUD.dismiss()
         }
     }
@@ -121,8 +122,8 @@ private extension ProfileViewController {
     }
     
     func updateProfileImage(imageData: Data) {
-        SVProgressHUD.show()
         guard let email = user?.email else { return }
+        SVProgressHUD.show()
         UserService.updateProfileImage(image: imageData, email: email) { [weak self] response in
             guard
                 let self = self,
