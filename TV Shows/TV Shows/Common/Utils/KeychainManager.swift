@@ -29,4 +29,7 @@ final class KeychainManager {
         return try? keychain.getData(key)
     }
     
+    func removeObject(key: String) {
+        keychain[data: key] = nil
+    }
 }

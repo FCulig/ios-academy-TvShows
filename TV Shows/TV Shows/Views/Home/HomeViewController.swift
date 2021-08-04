@@ -24,6 +24,7 @@ class HomeViewController : UIViewController {
     
     override func viewDidLoad(){
         super.viewDidLoad()
+        subscribeToLogoutNotification()
         configureNavigationBar()
         configureTableView()
         getTVShows(page: 1, items: items)
@@ -157,5 +158,19 @@ private extension HomeViewController {
     @objc private func refresh() {
         shows = []
         getTVShows(page: 1, items: items)
+    }
+    
+    // MARK: - Notifications
+    
+    func subscribeToLogoutNotification() {
+        NotificationCenter.default.addObserver(self, selector: #selector(openLoginScreen), name: Notification.Name("didLogout"), object: nil)
+    }
+    
+    @objc func openLoginScreen() {
+        let storyboard = UIStoryboard(name: "Login", bundle: nil)
+        let loginViewController = storyboard.instantiateViewController(
+            withIdentifier: String(describing: LoginViewController.self)
+        ) as! LoginViewController
+        navigationController?.setViewControllers([loginViewController], animated: true)
     }
 }

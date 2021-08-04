@@ -65,6 +65,11 @@ extension ProfileViewController: UINavigationControllerDelegate {
 extension ProfileViewController {
     
     @IBAction func logoutButtonPressed() {
+        dismiss(animated: true, completion: {
+            KeychainManager.shared.removeObject(key: "authInfo")
+            APIManager.shared.authInfo = nil
+            NotificationCenter.default.post(name: Notification.Name("didLogout"), object: nil)
+        })
     }
     
     @IBAction func changeProfileImageButtonPressed() {
