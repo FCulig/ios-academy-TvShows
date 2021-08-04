@@ -30,6 +30,8 @@ final class UserService {
         APIManager.shared.upload(
             data: requestData,
             url: UserRoute.updateProfileImage.baseURL + UserRoute.updateProfileImage.path,
+            method: UserRoute.updateProfileImage.method,
+            headers: UserRoute.updateProfileImage.headers,
             responseDecodableType: UserResponse.self,
             succsessHandler: onSuccess
         )
