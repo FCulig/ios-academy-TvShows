@@ -10,7 +10,7 @@ import Alamofire
 
 enum ReviewsRoute {
     
-    // MARK: - Authentication routes
+    // MARK: - Reviews routes
     
     case getReviews(showId: String,page: Int?, items: Int?)
     case postReview(rating: Int, comment: String, showId: String)

@@ -24,6 +24,7 @@ class HomeViewController : UIViewController {
     
     override func viewDidLoad(){
         super.viewDidLoad()
+        configureNavigationBar()
         configureTableView()
         getTVShows(page: 1, items: items)
     }
@@ -107,6 +108,26 @@ extension HomeViewController: UIScrollViewDelegate {
 // MARK: - Utilites
 
 private extension HomeViewController {
+    
+    func configureNavigationBar() {
+         let profileDetailsButton = UIBarButtonItem(
+            image: UIImage(named: "ic-profile"),
+            style: .plain,
+            target: self,
+            action: #selector(presentUserProfile)
+          )
+        profileDetailsButton.tintColor = UIColor(red: 82/255, green: 54/255, blue: 140/255, alpha: 1)
+        navigationItem.rightBarButtonItem = profileDetailsButton
+    }
+    
+    @objc func presentUserProfile() {
+        let storyboard = UIStoryboard(name: "Profile", bundle: nil)
+        let profileViewController = storyboard.instantiateViewController(
+            withIdentifier: String(describing: ProfileViewController.self)
+        ) as! ProfileViewController
+        let navigationController = UINavigationController(rootViewController: profileViewController)
+        present(navigationController, animated: true)
+    }
     
     func getTVShows(page: Int?, items: Int?) {
         SVProgressHUD.show()
