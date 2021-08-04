@@ -13,6 +13,7 @@ enum UserRoute {
     // MARK: - User routes
     
     case getCurrentUser
+    case updateProfileImage
     
 }
 
@@ -24,6 +25,8 @@ extension UserRoute: EndPointType {
         switch self {
         case .getCurrentUser:
             return "/users/me"
+        case .updateProfileImage:
+            return "/users"
         }
     }
     
@@ -31,12 +34,16 @@ extension UserRoute: EndPointType {
         switch self {
         case .getCurrentUser:
             return .get
+        case .updateProfileImage:
+            return .put
         }
     }
     
     var parameters: Parameters? {
         switch self {
         case .getCurrentUser:
+            return [:]
+        case .updateProfileImage:
             return [:]
         }
     }
@@ -48,5 +55,4 @@ extension UserRoute: EndPointType {
         request.headers = self.headers
         return try URLEncoding.default.encode(request,with: parameters)
     }
-    
 }

@@ -38,4 +38,22 @@ final class APIManager {
                 }
             }
     }
+    
+    func upload<T: Decodable>(
+        data: MultipartFormData,
+        url: String,
+        responseDecodableType: T.Type,
+        succsessHandler: @escaping (_ response: DataResponse<T, AFError>) -> Void) {
+        AF
+            .upload(multipartFormData: data, to: url)
+            .validate()
+            .responseDecodable(of: responseDecodableType) { dataResponse in
+                switch dataResponse.result {
+                case .success(_):
+                    succsessHandler(dataResponse)
+                case .failure(let error):
+                    SVProgressHUD.showError(withStatus: "Ooops something went wrong when uploading...")
+                }
+            }
+    }
 }
