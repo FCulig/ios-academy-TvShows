@@ -24,6 +24,7 @@ class LoginViewController : UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         initializeUI()
+        loginUser(email: "filip.culig@gmail.com", password: "123321")
     }
     
     // MARK: - Hide navigation bar
@@ -118,13 +119,28 @@ private extension LoginViewController {
     
     func handleSuccessfulLogin(response: DataResponse<UserResponse, AFError>) {
         let headers = response.response?.headers.dictionary ?? [:]
-        guard let authHeaders = try? AuthInfo(headers: headers) else {
-            SVProgressHUD.showError(withStatus: "Missing headers")
+        
+        guard
+            let userData = try? response.result.get(),
+            let authInfo = try? AuthInfo(headers: headers)
+        else {
+            SVProgressHUD.showError(withStatus: "Error while trying to login")
             return
         }
-        APIManager.shared.headers = authHeaders
-        SVProgressHUD.dismiss()
-        navigateToHomeView()
+        
+        APIManager.shared.authInfo = authInfo
+        
+        let homeViewController = instantiateHomeViewController(userData: userData)
+        navigateToViewController(viewController: homeViewController)
+    }
+    
+    private func instantiateHomeViewController(userData: UserResponse?) -> HomeViewController {
+        let storyboard = UIStoryboard(name: "Home", bundle: nil)
+        let homeViewController = storyboard.instantiateViewController(
+            withIdentifier: String(describing: HomeViewController.self)
+        ) as! HomeViewController
+        homeViewController.user = userData
+        return homeViewController
     }
     
     private func handleSuccessfulRegistration(response: DataResponse<UserResponse, AFError>) {
@@ -132,10 +148,8 @@ private extension LoginViewController {
         loginPressed()
     }
     
-    func navigateToHomeView() {
-        let storyboard = UIStoryboard(name: "Home", bundle: nil)
-        let viewControllerD = storyboard.instantiateViewController(withIdentifier: "HomeViewController")
-        navigationController?.pushViewController(viewControllerD, animated: true)
+    func navigateToViewController(viewController: UIViewController) {
+        navigationController?.setViewControllers([viewController], animated: true)
     }
 }
 
