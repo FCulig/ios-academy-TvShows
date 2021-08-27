@@ -40,6 +40,8 @@
 		425D416226A8B29A007EFA44 /* AuthRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 425D416126A8B29A007EFA44 /* AuthRoute.swift */; };
 		4274C450269AE0F800D205EE /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4274C44F269AE0F800D205EE /* Login.storyboard */; };
 		4274C452269AE10E00D205EE /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4274C451269AE10E00D205EE /* LoginViewController.swift */; };
+		42EC606026B9DC0100160406 /* KeychainManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42EC605F26B9DC0100160406 /* KeychainManager.swift */; };
+		42EC606626B9F5DD00160406 /* ImageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42EC606526B9F5DD00160406 /* ImageManager.swift */; };
 		906B511FC4724AD786E6DFA2 /* Pods_TV_Shows.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05BDDA4BAE296372D8790DEE /* Pods_TV_Shows.framework */; };
 /* End PBXBuildFile section */
 
@@ -80,6 +82,8 @@
 		425D416126A8B29A007EFA44 /* AuthRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthRoute.swift; sourceTree = "<group>"; };
 		4274C44F269AE0F800D205EE /* Login.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
 		4274C451269AE10E00D205EE /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		42EC605F26B9DC0100160406 /* KeychainManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainManager.swift; sourceTree = "<group>"; };
+		42EC606526B9F5DD00160406 /* ImageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageManager.swift; sourceTree = "<group>"; };
 		98A58600877FE61D65834300 /* Pods-TV Shows.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TV Shows.release.xcconfig"; path = "Target Support Files/Pods-TV Shows/Pods-TV Shows.release.xcconfig"; sourceTree = "<group>"; };
 		DBC1896F5824A307F0326AD7 /* Pods-TV Shows.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TV Shows.debug.xcconfig"; path = "Target Support Files/Pods-TV Shows/Pods-TV Shows.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -214,6 +218,7 @@
 				425D416126A8B29A007EFA44 /* AuthRoute.swift */,
 				424CED6D26AD3E1400BB7AFB /* ShowsRoute.swift */,
 				42215DD726B08B3300316FE2 /* ReviewsRoute.swift */,
+				42EC606526B9F5DD00160406 /* ImageManager.swift */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -221,6 +226,7 @@
 		425D416026A8B252007EFA44 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				42EC605E26B9DBE400160406 /* Utils */,
 				425D412E26A758D1007EFA44 /* Networking */,
 				425D412D26A75490007EFA44 /* Services */,
 			);
@@ -234,6 +240,14 @@
 				4274C451269AE10E00D205EE /* LoginViewController.swift */,
 			);
 			path = Login;
+			sourceTree = "<group>";
+		};
+		42EC605E26B9DBE400160406 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				42EC605F26B9DC0100160406 /* KeychainManager.swift */,
+			);
+			path = Utils;
 			sourceTree = "<group>";
 		};
 		889E5A5EA4313C1D20557531 /* Frameworks */ = {
@@ -368,6 +382,7 @@
 				425D415F26A8A9FC007EFA44 /* EndPointType.swift in Sources */,
 				42215DDA26B08C0200316FE2 /* ReviewsService.swift in Sources */,
 				424CED7026AD9DF200BB7AFB /* Show.swift in Sources */,
+				42EC606626B9F5DD00160406 /* ImageManager.swift in Sources */,
 				42215DD226AF3F4A00316FE2 /* TVShowReviewTableViewCell.swift in Sources */,
 				42215DDC26B1D61D00316FE2 /* RatingView.swift in Sources */,
 				4274C452269AE10E00D205EE /* LoginViewController.swift in Sources */,
@@ -384,6 +399,7 @@
 				424CED7226AD9E1C00BB7AFB /* ShowsResponse.swift in Sources */,
 				42215DD626B08A4500316FE2 /* Review.swift in Sources */,
 				424CED6C26ACAF9200BB7AFB /* ShowsService.swift in Sources */,
+				42EC606026B9DC0100160406 /* KeychainManager.swift in Sources */,
 				42215DD426B08A3900316FE2 /* ReviewsResponse.swift in Sources */,
 				42215DE526B1F03F00316FE2 /* ReviewResponse.swift in Sources */,
 				42215DD026AF3EF600316FE2 /* TVShowDetailsTableViewCell.swift in Sources */,

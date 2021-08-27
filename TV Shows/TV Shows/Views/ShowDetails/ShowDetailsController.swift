@@ -18,8 +18,6 @@ class ShowDetailsController: UIViewController {
     var reviewPagination: Pagination?
     private var tableData: [Any] = []
     private let items: Int = 20
-    private let initialPage: Int = 1
-    private var currentPage: Int = 1
     private var isFetchingReviews: Bool = false
     
     // MARK: - IBOutlets
@@ -28,9 +26,8 @@ class ShowDetailsController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        getReviews(page: initialPage, items: items)
+        getReviews(page: 1, items: items)
         configureUI()
-        configureTableData()
     }
     
     // MARK: - Reseting size of navigation bar
@@ -59,6 +56,8 @@ extension ShowDetailsController: UITableViewDelegate {
         tableView.dataSource = self
         tableView.delegate = self
         tableView.allowsSelection = false
+        tableView.separatorColor = .white
+        tableData = [show, "No reviews yet."]
     }
     
 }
@@ -66,10 +65,6 @@ extension ShowDetailsController: UITableViewDelegate {
 // MARK: - UITableViewDataSource
 
 extension ShowDetailsController: UITableViewDataSource {
-    
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
-    }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return tableData.count
@@ -102,6 +97,14 @@ extension ShowDetailsController: UITableViewDataSource {
             return cell
         }
         
+        if type(of: cellData) == String.self {
+            let cell = tableView.dequeueReusableCell(
+                withIdentifier: "NoReviewsTableViewCell",
+                for: indexPath
+            )
+            return cell
+        }
+        
         return UITableViewCell()
     }
 }
@@ -112,8 +115,8 @@ extension ShowDetailsController: UIScrollViewDelegate {
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         if shouldFetchReviews(scrollView: scrollView) {
-            currentPage += 1
-            getReviews(page: currentPage, items: items)
+            guard let currentPage = reviewPagination?.page else { return }
+            getReviews(page: currentPage + 1, items: items)
         }
     }
     
@@ -121,6 +124,7 @@ extension ShowDetailsController: UIScrollViewDelegate {
         let position = scrollView.contentOffset.y
         let currentHeight = tableView.contentSize.height - 100 - scrollView.frame.height
         guard let totalPages = reviewPagination?.pages else { return false }
+        guard let currentPage = reviewPagination?.page else { return  false}
         return position > currentHeight && !isFetchingReviews && totalPages > currentPage
     }
     
@@ -138,10 +142,6 @@ private extension ShowDetailsController {
     func setNavigationBarTitle(title: String?) {
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationItem.title = title
-    }
-    
-    func configureTableData() {
-        tableData.append(show as Any)
     }
     
     func presentWriteReviewScreen() {
@@ -171,9 +171,16 @@ private extension ShowDetailsController {
                 SVProgressHUD.showError(withStatus: "Error while fetching reviews")
                 return
             }
+            
+            if reviews.count > 0 {
+                self.tableData = [show]
+                self.tableView.separatorColor = .lightGray
+            }
+            
             SVProgressHUD.dismiss()
             self.isFetchingReviews = false
             self.reviews += reviews
+            self.tableData = [self.show]
             self.tableData += self.reviews
             self.reviewPagination = pagination
             self.tableView.reloadData()
@@ -185,9 +192,9 @@ extension ShowDetailsController: WriteReviewControllerDelegate {
     
     func reviewSubmited(submissionResult: Bool) {
         guard submissionResult else { return }
-        currentPage = initialPage
         reviews = []
         tableData = [show]
+        guard let currentPage = reviewPagination?.page else { return }
         getReviews(page: currentPage, items: items)
     }
 }

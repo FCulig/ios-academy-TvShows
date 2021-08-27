@@ -9,6 +9,7 @@ import Foundation
 import UIKit
 import SVProgressHUD
 import Alamofire
+import KeychainAccess
 
 class LoginViewController : UIViewController {
     
@@ -20,11 +21,12 @@ class LoginViewController : UIViewController {
     @IBOutlet private weak var rememberMeButton: UIButton!
     @IBOutlet private weak var loginButton: UIButton!
     @IBOutlet private weak var registerButton: UIButton!
+    @IBOutlet private weak var formStackView: UIStackView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         initializeUI()
-        loginUser(email: "filip.culig@gmail.com", password: "123321")
+        animateUI()
     }
     
     // MARK: - Hide navigation bar
@@ -130,6 +132,10 @@ private extension LoginViewController {
         
         APIManager.shared.authInfo = authInfo
         
+        if rememberMeButton.isSelected {
+            storeAuthInfoToDevice(authInfo: authInfo)
+        }
+        
         let homeViewController = instantiateHomeViewController(userData: userData)
         navigateToViewController(viewController: homeViewController)
     }
@@ -139,7 +145,6 @@ private extension LoginViewController {
         let homeViewController = storyboard.instantiateViewController(
             withIdentifier: String(describing: HomeViewController.self)
         ) as! HomeViewController
-        homeViewController.user = userData
         return homeViewController
     }
     
@@ -156,6 +161,13 @@ private extension LoginViewController {
 // MARK: - Utility
 
 private extension LoginViewController {
+    
+    // MARK: - KeychainAccess
+    
+    func storeAuthInfoToDevice(authInfo: AuthInfo) {
+        guard let encodedAuthInfo = try? JSONEncoder().encode(authInfo) else { return }
+        KeychainManager.shared.storeObject(key: "authInfo", value: encodedAuthInfo)
+    }
     
     // MARK: - UI initialization
     
@@ -216,4 +228,16 @@ private extension LoginViewController {
         registerButton.isEnabled = false
     }
     
+    func animateUI() {
+        formStackView.transform = CGAffineTransform(translationX: 0, y: 200)
+        formStackView.alpha = 0
+        UIView.animateKeyframes(
+            withDuration: 2,
+            delay: 0,
+            options: [],
+            animations: {
+                self.formStackView.transform = CGAffineTransform(translationX: 0, y: 0)
+                self.formStackView.alpha = 1
+            })
+    }
 }
