@@ -24,6 +24,8 @@ class HomeViewController : UIViewController {
     
     override func viewDidLoad(){
         super.viewDidLoad()
+        subscribeToLogoutNotification()
+        configureNavigationBar()
         configureTableView()
         getTVShows(page: 1, items: items)
     }
@@ -108,6 +110,26 @@ extension HomeViewController: UIScrollViewDelegate {
 
 private extension HomeViewController {
     
+    func configureNavigationBar() {
+         let profileDetailsButton = UIBarButtonItem(
+            image: UIImage(named: "ic-profile"),
+            style: .plain,
+            target: self,
+            action: #selector(presentUserProfile)
+          )
+        profileDetailsButton.tintColor = UIColor(red: 82/255, green: 54/255, blue: 140/255, alpha: 1)
+        navigationItem.rightBarButtonItem = profileDetailsButton
+    }
+    
+    @objc func presentUserProfile() {
+        let storyboard = UIStoryboard(name: "Profile", bundle: nil)
+        let profileViewController = storyboard.instantiateViewController(
+            withIdentifier: String(describing: ProfileViewController.self)
+        ) as! ProfileViewController
+        let navigationController = UINavigationController(rootViewController: profileViewController)
+        present(navigationController, animated: true)
+    }
+    
     func getTVShows(page: Int?, items: Int?) {
         SVProgressHUD.show()
         isFetchingShows = true
@@ -136,5 +158,19 @@ private extension HomeViewController {
     @objc private func refresh() {
         shows = []
         getTVShows(page: 1, items: items)
+    }
+    
+    // MARK: - Notifications
+    
+    func subscribeToLogoutNotification() {
+        NotificationCenter.default.addObserver(self, selector: #selector(openLoginScreen), name: Notification.Name("didLogout"), object: nil)
+    }
+    
+    @objc func openLoginScreen() {
+        let storyboard = UIStoryboard(name: "Login", bundle: nil)
+        let loginViewController = storyboard.instantiateViewController(
+            withIdentifier: String(describing: LoginViewController.self)
+        ) as! LoginViewController
+        navigationController?.setViewControllers([loginViewController], animated: true)
     }
 }

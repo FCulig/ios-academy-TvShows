@@ -42,6 +42,10 @@
 		4274C452269AE10E00D205EE /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4274C451269AE10E00D205EE /* LoginViewController.swift */; };
 		42EC606026B9DC0100160406 /* KeychainManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42EC605F26B9DC0100160406 /* KeychainManager.swift */; };
 		42EC606626B9F5DD00160406 /* ImageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42EC606526B9F5DD00160406 /* ImageManager.swift */; };
+		42EC606926BA7CCA00160406 /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 42EC606826BA7CCA00160406 /* Profile.storyboard */; };
+		42EC606B26BA7CE400160406 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42EC606A26BA7CE400160406 /* ProfileViewController.swift */; };
+		42EC606D26BA829C00160406 /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42EC606C26BA829C00160406 /* UserService.swift */; };
+		42EC606F26BA830600160406 /* UserRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42EC606E26BA830600160406 /* UserRoute.swift */; };
 		906B511FC4724AD786E6DFA2 /* Pods_TV_Shows.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05BDDA4BAE296372D8790DEE /* Pods_TV_Shows.framework */; };
 /* End PBXBuildFile section */
 
@@ -84,6 +88,10 @@
 		4274C451269AE10E00D205EE /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		42EC605F26B9DC0100160406 /* KeychainManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainManager.swift; sourceTree = "<group>"; };
 		42EC606526B9F5DD00160406 /* ImageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageManager.swift; sourceTree = "<group>"; };
+		42EC606826BA7CCA00160406 /* Profile.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Profile.storyboard; sourceTree = "<group>"; };
+		42EC606A26BA7CE400160406 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		42EC606C26BA829C00160406 /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
+		42EC606E26BA830600160406 /* UserRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRoute.swift; sourceTree = "<group>"; };
 		98A58600877FE61D65834300 /* Pods-TV Shows.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TV Shows.release.xcconfig"; path = "Target Support Files/Pods-TV Shows/Pods-TV Shows.release.xcconfig"; sourceTree = "<group>"; };
 		DBC1896F5824A307F0326AD7 /* Pods-TV Shows.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TV Shows.debug.xcconfig"; path = "Target Support Files/Pods-TV Shows/Pods-TV Shows.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -192,6 +200,7 @@
 		425D412626A601E2007EFA44 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				42EC606726BA7CB300160406 /* Profile */,
 				42215DDF26B1E15C00316FE2 /* WriteReview */,
 				42215DCA26AE793E00316FE2 /* ShowDetails */,
 				425D40FE26A5CAE8007EFA44 /* Home */,
@@ -206,6 +215,7 @@
 				425D413626A7E25D007EFA44 /* AuthenticationService.swift */,
 				424CED6B26ACAF9200BB7AFB /* ShowsService.swift */,
 				42215DD926B08C0200316FE2 /* ReviewsService.swift */,
+				42EC606C26BA829C00160406 /* UserService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -219,6 +229,7 @@
 				424CED6D26AD3E1400BB7AFB /* ShowsRoute.swift */,
 				42215DD726B08B3300316FE2 /* ReviewsRoute.swift */,
 				42EC606526B9F5DD00160406 /* ImageManager.swift */,
+				42EC606E26BA830600160406 /* UserRoute.swift */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -248,6 +259,15 @@
 				42EC605F26B9DC0100160406 /* KeychainManager.swift */,
 			);
 			path = Utils;
+			sourceTree = "<group>";
+		};
+		42EC606726BA7CB300160406 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				42EC606826BA7CCA00160406 /* Profile.storyboard */,
+				42EC606A26BA7CE400160406 /* ProfileViewController.swift */,
+			);
+			path = Profile;
 			sourceTree = "<group>";
 		};
 		889E5A5EA4313C1D20557531 /* Frameworks */ = {
@@ -322,6 +342,7 @@
 				4215773026975F3B008CCFF0 /* Assets.xcassets in Resources */,
 				4274C450269AE0F800D205EE /* Login.storyboard in Resources */,
 				42215DCE26AE797900316FE2 /* ShowDetails.storyboard in Resources */,
+				42EC606926BA7CCA00160406 /* Profile.storyboard in Resources */,
 				425D410226A5CB52007EFA44 /* Home.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -387,6 +408,8 @@
 				42215DDC26B1D61D00316FE2 /* RatingView.swift in Sources */,
 				4274C452269AE10E00D205EE /* LoginViewController.swift in Sources */,
 				424CED6A26ACAC9200BB7AFB /* TVShowTableViewCell.swift in Sources */,
+				42EC606B26BA7CE400160406 /* ProfileViewController.swift in Sources */,
+				42EC606D26BA829C00160406 /* UserService.swift in Sources */,
 				425D412A26A68FD2007EFA44 /* AuthInfo.swift in Sources */,
 				42215DCC26AE796700316FE2 /* ShowDetailsController.swift in Sources */,
 				425D416226A8B29A007EFA44 /* AuthRoute.swift in Sources */,
@@ -397,6 +420,7 @@
 				425D410026A5CB1C007EFA44 /* HomeViewController.swift in Sources */,
 				425D412C26A68FF9007EFA44 /* UserResponse.swift in Sources */,
 				424CED7226AD9E1C00BB7AFB /* ShowsResponse.swift in Sources */,
+				42EC606F26BA830600160406 /* UserRoute.swift in Sources */,
 				42215DD626B08A4500316FE2 /* Review.swift in Sources */,
 				424CED6C26ACAF9200BB7AFB /* ShowsService.swift in Sources */,
 				42EC606026B9DC0100160406 /* KeychainManager.swift in Sources */,

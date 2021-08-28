@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Profile View Controller-->
+        <scene sceneID="s0d-6b-0kx">
+            <objects>
+                <viewController storyboardIdentifier="ProfileViewController" id="Y6W-OH-hqX" customClass="ProfileViewController" customModule="TV_Shows" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mNH-Lv-hND">
+                                <rect key="frame" x="20" y="144" width="374" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic-profile-placeholder" translatesAutoresizingMaskIntoConstraints="NO" id="LAl-XD-SUo">
+                                <rect key="frame" x="20" y="185" width="100" height="100"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="100" id="K9C-3L-IZq"/>
+                                    <constraint firstAttribute="width" constant="100" id="dfW-Ho-iRV"/>
+                                </constraints>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AxG-44-Kja">
+                                <rect key="frame" x="140" y="220" width="254" height="30"/>
+                                <state key="normal" title="Change Profile Photo">
+                                    <color key="titleColor" red="0.3224566579" green="0.2114402652" blue="0.54911524060000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="changeProfileImageButtonPressed" destination="Y6W-OH-hqX" eventType="touchUpInside" id="FNm-NN-yCJ"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="A4u-EF-vUW">
+                                <rect key="frame" x="20" y="325" width="374" height="48"/>
+                                <color key="backgroundColor" red="0.3224566579" green="0.2114402652" blue="0.54911524060000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="48" id="LqV-Fc-SdP"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                <state key="normal" title="Logout">
+                                    <color key="titleColor" red="0.97636479139999999" green="0.97653168440000004" blue="0.9763541818" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="22"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="logoutButtonPressed" destination="Y6W-OH-hqX" eventType="touchUpInside" id="OdG-Df-Rw9"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="mNH-Lv-hND" secondAttribute="trailing" constant="20" id="1FD-6U-tQ8"/>
+                            <constraint firstItem="AxG-44-Kja" firstAttribute="leading" secondItem="LAl-XD-SUo" secondAttribute="trailing" constant="20" id="5ij-pn-X0d"/>
+                            <constraint firstItem="mNH-Lv-hND" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="20" id="6NL-Ek-6Wd"/>
+                            <constraint firstItem="AxG-44-Kja" firstAttribute="top" secondItem="mNH-Lv-hND" secondAttribute="bottom" constant="55" id="9sX-GH-2qY"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="A4u-EF-vUW" secondAttribute="trailing" constant="20" id="Ft6-9e-7Dq"/>
+                            <constraint firstItem="A4u-EF-vUW" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="20" id="ZIB-TF-abF"/>
+                            <constraint firstItem="A4u-EF-vUW" firstAttribute="top" secondItem="LAl-XD-SUo" secondAttribute="bottom" constant="40" id="gtj-eK-3Ew"/>
+                            <constraint firstItem="mNH-Lv-hND" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="100" id="hJg-uf-Nao"/>
+                            <constraint firstItem="LAl-XD-SUo" firstAttribute="top" secondItem="mNH-Lv-hND" secondAttribute="bottom" constant="20" id="meQ-AR-8s2"/>
+                            <constraint firstItem="LAl-XD-SUo" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="20" id="thL-kE-IjX"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="AxG-44-Kja" secondAttribute="trailing" constant="20" id="vDu-Vh-idE"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="emailLabel" destination="mNH-Lv-hND" id="gbp-ys-7Lx"/>
+                        <outlet property="profileImage" destination="LAl-XD-SUo" id="PHi-hn-ORX"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="86" y="76"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="ic-profile-placeholder" width="150" height="150"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>
